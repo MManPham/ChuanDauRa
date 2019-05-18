@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>templet</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<header>
+       <nav class="navbar navbar-expand-lg navbar-light bg-info text-light py-3 main-nav">
+          <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjhjPfY_97WAhWCOI8KHSvHA34QjRwIBw&url=http%3A%2F%2Fpluspng.com%2Fhp-png-1793.html&psig=AOvVaw38ZFiKrvcpgGwQUMhu9Vx8&ust=1507481987906950" alt="Logo"></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link text-uppercase" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#story">about</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#expertise">expertise</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#team">teams</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#works">works</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#people-say">pepole say</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link  text-uppercase" href="#contact">contact</a>
+                  </li>
+                </ul>
+              </div>
+          </div>
+        </nav>
+    </header>
+<body>
+<div class="container" style="padding-top: 30px;">
+  
+    <div id="products" class="row view-group">
+                <div class="item col-xs-8 col-lg-8">
+                    
+                        <div class="img-event">
+                            <h1 class="group card-title inner list-group-item-heading">
+                                Tin tức chung</h1>
+                        </div>
+                        <div class="caption card-body">
+                            <p>- Tổng tín chỉ đạt được: 100</p>
+                            <p>- Tổng chuẩn đầu ra hoàn thành: 7/13</p><hr>
+                            <h1>Các khóa học</h1>
+                            <h2>Tìm kiếm</h2>
+                            Khóa học <select id="options" onchange="optionCheck()">
+                                        <option value="show">Show Div</option>
+                                        <option value="goto">Go To Google</option>
+                                     </select>&emsp;
+                            Năm <select id="options" onchange="optionCheck()">
+                                        <option value="show">Show Div</option>
+                                        <option value="goto">Go To Google</option>
+                                     </select>&emsp;
+                            Học kỳ <select id="options" onchange="optionCheck()">
+                                        <option value="show">HK1</option>
+                                        <option value="goto">HK2</option>
+                                        <option value="goto">HK3</option>
+                                     </select>&emsp;&emsp;&emsp;
+                            <button class="btn-info">Xem</button><br>
+                            <br>
+                             <div class="thumbnail card">
+                                <p>- Tên môn học chuyên nghành:&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; -Số tín chỉ: </p>
+                                <p>- Kết quả học tập</p>
+                                <div class="table-responsive" id="sailorTableArea">
+                                    <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+                                 
+                                        <thead>
+                                            <tr>
+                                                <th>Quá trình</th>
+                                                <th>Giữa kỳ</th>
+                                                <th>Thực hành</th>
+                                                <th>Cuối kỳ</th>
+                                                <th>Trung bình</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>- Đạt chuẩn đầu ra</P>
+                                <div class="table-responsive" id="sailorTableArea">
+                                    <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+                                 
+                                        <thead>
+                                            <tr>
+                                                <th>Môn học</th>
+                                                <th>Chuyên nghành</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr> 
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr> 
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr> 
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr> 
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                             </div>
+                               
+                       
+                    </div>
+                </div>
+                
+                <div class="item col-xs-4 col-lg-4">
+                    <div class="table-responsive" id="sailorTableArea">
+                        <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+                     
+                            <thead>
+                                <tr>
+                                    <th colspan="2"><h5>&emsp;&emsp;&emsp;Chuẩn đầu ra đạt được</h5></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+
+                                <tr>
+                                    <td colspan="2">Tổng CĐR hoàn thành:</td>
+                                   
+                                </tr> 
+                             
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+    </div>
+</div>
+</body>
+
+<footer class="section footer-classic context-dark bg-image" style="background: #2d3246;">
+        <div class="container">
+          <div class="row row-30">
+            <div class="col-md-4 col-xl-5">
+              <div class="pr-xl-4"><a class="brand" href="index.html"><img class="brand-logo-light" src="images/agency/logo-inverse-140x37.png" alt="" width="140" height="37" srcset="images/agency/logo-retina-inverse-280x74.png 2x"></a>
+                <p>We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.</p>
+                <!-- Rights-->
+                <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Waves</span><span>. </span><span>All Rights Reserved.</span></p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h5>Contacts</h5>
+              <dl class="contact-list">
+                <dt>Address:</dt>
+                <dd>798 South Park Avenue, Jaipur, Raj</dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>email:</dt>
+                <dd><a href="mailto:#">123456789@gmail.com</a></dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>phones:</dt>
+                <dd><a href="tel:#">+84123456789</a> <span>or</span> <a href="tel:#">+84123456789</a>
+                </dd>
+              </dl>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <h5>Links</h5>
+              <ul class="nav-list">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacts</a></li>
+                <li><a href="#">Pricing</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row no-gutters social-container">
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-facebook"></span><span>Facebook</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-instagram"></span><span>instagram</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-twitter"></span><span>twitter</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-youtube-play"></span><span>google</span></a></div>
+        </div>
+      </footer>
+
+  </html>
