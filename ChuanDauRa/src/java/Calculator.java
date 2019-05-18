@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ThLongLy
+ * @author Man Pham
  */
 @WebServlet(urlPatterns = {"/Calculator"})
 
@@ -59,7 +59,7 @@ public class Calculator extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        response.setContentType("text/html");
+                response.setContentType("text/html");
         PrintWriter out=response.getWriter();
         out.println("Ket qua \n");
         try{
@@ -104,8 +104,8 @@ public class Calculator extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        doGet(request,response);
+        processRequest(request, response);
+    doGet(request,response);
     }
 
     /**
