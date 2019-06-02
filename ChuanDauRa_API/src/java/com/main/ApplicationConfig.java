@@ -29,9 +29,13 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.controllers.AccountC.class);
         resources.add(com.controllers.KetQuaHocC.class);
         resources.add(com.controllers.SinhVienC.class);
         resources.add(com.main.GenericResource.class);
     }
     
 }
+
+
+

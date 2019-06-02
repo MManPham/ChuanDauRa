@@ -19,7 +19,7 @@ import java.sql.Statement;
 public class ConnectDB {
     
     private static final String DB_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String DB_URL = "jdbc:sqlserver://localhost\\MISASME2017:1433;databaseName=DATABASENAME";
+    private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=DATABASENAME";
     private static final String DB_USERNAME = "sa";
     private static final String DB_PASSWORD = "123";
 
@@ -58,6 +58,12 @@ public class ConnectDB {
     public static Connection getPreparedStatement() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public PreparedStatement prepareStatement(String SPsql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
 }
+
+

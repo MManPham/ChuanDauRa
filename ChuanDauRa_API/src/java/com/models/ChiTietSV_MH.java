@@ -35,13 +35,13 @@ public class ChiTietSV_MH {
     public ChiTietSV_MH(ResultSet rs) throws SQLException
     {
         this.maDT = rs.getString("MADT");
-        this.phaLoai = rs.getString("PHANLOAI");
-        this.hocKi = rs.getString("HOCKI");
+        this.phaLoai = rs.getString("LOAI");
+        this.hocKi = rs.getString("HK");
         this.namHoc = rs.getString("NAMHOC");
         this.cau = rs.getInt("CAU");
         this.diem = rs.getInt("DIEM");
         this.diemToiDa = rs.getInt("DIEMTOIDA");
-        this.chuanDauRa = rs.getString("CHUANDAURA")+","+ ((float)(this.diem/(this.diemToiDa *1.0))*100) + "%";
+        this.chuanDauRa = rs.getString("CDR")+","+ ((float)(this.diem/(this.diemToiDa *1.0))*100) + "%";
     }
 
     public ChiTietSV_MH() {
@@ -113,3 +113,4 @@ public class ChiTietSV_MH {
 
     
 }
+

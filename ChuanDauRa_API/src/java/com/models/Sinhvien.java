@@ -27,51 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Man Pham
  */
-@Entity
-@Table(name = "SINHVIEN")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Sinhvien.findAll", query = "SELECT s FROM Sinhvien s"),
-    @NamedQuery(name = "Sinhvien.findByMssv", query = "SELECT s FROM Sinhvien s WHERE s.mssv = :mssv"),
-    @NamedQuery(name = "Sinhvien.findByTensv", query = "SELECT s FROM Sinhvien s WHERE s.tensv = :tensv"),
-    @NamedQuery(name = "Sinhvien.findBySodt", query = "SELECT s FROM Sinhvien s WHERE s.sodt = :sodt"),
-    @NamedQuery(name = "Sinhvien.findByNienkhoa", query = "SELECT s FROM Sinhvien s WHERE s.nienkhoa = :nienkhoa"),
-    @NamedQuery(name = "Sinhvien.findByPassw", query = "SELECT s FROM Sinhvien s WHERE s.passw = :passw")})
 public class Sinhvien implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 8)
-    @Column(name = "MSSV")
     private String mssv;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "TENSV")
     private String tensv;
-    @Size(max = 10)
-    @Column(name = "SODT")
     private String sodt;
-    @Size(max = 10)
-    @Column(name = "NIENKHOA")
     private String nienkhoa;
-    @Size(max = 30)
-    @Column(name = "PASSW")
     private String passw;
-    
-    @Size(max = 30)
-    @Column(name = "MACHUYENNGANH")
     private String maCN;
-//    
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
-//    private Collection<SinhvienMonhoc> sinhvienMonhocCollection;
-//    @JoinColumn(name = "MACHUYENNGANH", referencedColumnName = "MACHUYENNGANH")
-//    @ManyToOne
-//    private Chuyennganh machuyennganh;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
-//    private Collection<Ketquathi> ketquathiCollection;
+    private CDR_KH chuanDauRA_KH;
 
     public Sinhvien() {
     }
@@ -93,6 +56,24 @@ public class Sinhvien implements Serializable {
         this.nienkhoa = nienkhoa;
         this.passw = passw;
         this.maCN = maCN;
+    }
+
+    public Sinhvien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, CDR_KH chuanDauRA_KH) {
+        this.mssv = mssv;
+        this.tensv = tensv;
+        this.sodt = sodt;
+        this.nienkhoa = nienkhoa;
+        this.passw = passw;
+        this.maCN = maCN;
+        this.chuanDauRA_KH = chuanDauRA_KH;
+    }
+
+    public CDR_KH getChuanDauRA_KH() {
+        return chuanDauRA_KH;
+    }
+
+    public void setChuanDauRA_KH(CDR_KH chuanDauRA_KH) {
+        this.chuanDauRA_KH = chuanDauRA_KH;
     }
 
     public String getMssv() {
@@ -195,3 +176,6 @@ public class Sinhvien implements Serializable {
     }
     
 }
+
+
+
