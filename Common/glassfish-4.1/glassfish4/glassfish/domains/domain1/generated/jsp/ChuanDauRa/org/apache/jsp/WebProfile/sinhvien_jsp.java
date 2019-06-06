@@ -103,7 +103,9 @@ public final class sinhvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"caption card-body\">\n");
-      out.write("                        <p>- Tổng tín chỉ đạt được: 100</p>\n");
+      out.write("                        <p>- Tổng tín chỉ đạt được: ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ketquaHT.size()*4}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</p>\n");
       out.write("                        <p>- Tổng chuẩn đầu ra hoàn thành: 7/13</p><hr>\n");
       out.write("                        <h1>Các khóa học</h1>\n");
       out.write("                        <h2>Tìm kiếm</h2>\n");

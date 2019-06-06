@@ -47,7 +47,7 @@
 
                     </div>
                     <div class="caption card-body">
-                        <p>- Tổng tín chỉ đạt được: 100</p>
+                        <p>- Tổng tín chỉ đạt được: ${ketquaHT.size()*4}</p>
                         <p>- Tổng chuẩn đầu ra hoàn thành: 7/13</p><hr>
                         <h1>Các khóa học</h1>
                         <h2>Tìm kiếm</h2>
