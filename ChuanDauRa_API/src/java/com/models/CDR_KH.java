@@ -9,24 +9,28 @@ import java.util.List;
 
 /**
  *
- * @author Hayama
+ * @author Man Pham
  */
-public class testCDR_KH {
-    private List<CDR_KH_KQ> danhSach_CDR_CN;
+public class CDR_KH {
+    private List<String> danhSach_CDR_CN;
     
-     public testCDR_KH() {
-     
-     }
-    public testCDR_KH(List<CDR_KH_KQ> danhSach_CDR_CN) {
+    public CDR_KH() {   
+    }
+
+    public CDR_KH(List<String> danhSach_CDR_CN) {
         this.danhSach_CDR_CN = danhSach_CDR_CN;
     }
-    
-    public List<CDR_KH_KQ> getDanhSach_CDR_CN() {
+
+    public List<String> getdanhSach_CDR_CN() {
         return danhSach_CDR_CN;
     }
 
-    public void setDanhSach_CDR_CN(List<CDR_KH_KQ> danhSach_CDR_CN) {
+    public void setdanhSach_CDR_CN(List<String> danhSach_CDR_CN) {
         this.danhSach_CDR_CN = danhSach_CDR_CN;
     }
-
+    
+    
 }
+
+
+

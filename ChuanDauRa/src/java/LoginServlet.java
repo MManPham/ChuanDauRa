@@ -5,13 +5,19 @@
  */
 
 import HttpRequest.HttpLogin;
-import Models.Sinhvien;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.models.CDR_KH_KQW;
+import com.models.CDR_MHW;
+import com.models.ListCDR_MHW;
+import com.models.SinhvienW;
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,6 +26,50 @@ import org.json.JSONObject;
  * @author Man Pham
  */
 public class LoginServlet extends HttpServlet {
+
+    public SinhvienW getSinhVienJson(String jsonResponse) {
+
+        List<CDR_KH_KQW> ls_cdr_khkq = new ArrayList<>();
+        List<ListCDR_MHW> ls_cdr_mh = new ArrayList<>();
+        JSONObject sv_object = new JSONObject(jsonResponse.toString());
+
+        JSONArray json_ls_cdrkh = sv_object.getJSONArray("chuanDauRA_KH");
+        for (int i = 0; i < json_ls_cdrkh.length(); i++) {
+            String chuanDaura = json_ls_cdrkh.getJSONObject(i).getString("chuanDaura");
+            float ketQua = json_ls_cdrkh.getJSONObject(i).getFloat("ketQua");
+            CDR_KH_KQW cdrkh = new CDR_KH_KQW(chuanDaura, ketQua);
+            ls_cdr_khkq.add(cdrkh);
+        }
+
+        JSONArray json_ls_cdrmh = sv_object.getJSONArray("listCDR_MH");
+        for (int i = 0; i < json_ls_cdrmh.length(); i++) {
+
+            JSONObject cdrmh_object = json_ls_cdrmh.getJSONObject(i);
+            String maMonHoc = cdrmh_object.getString("maMon");
+
+            JSONArray danhSach_CDR_CN = cdrmh_object.getJSONArray("danhSach_CDR_CN");
+            List<CDR_MHW> new_ls_cdrmh = new ArrayList<>();
+            for (int j = 0; j < danhSach_CDR_CN.length(); j++) {
+                String chuanDauRaMonHoc = danhSach_CDR_CN.getJSONObject(i).getString("chuanDauRaMonHoc");
+                float ketQua = danhSach_CDR_CN.getJSONObject(i).getFloat("ketQua");
+                CDR_MHW cdrmh = new CDR_MHW(chuanDauRaMonHoc, ketQua);
+                new_ls_cdrmh.add(cdrmh);
+            }
+
+            ls_cdr_mh.add(new ListCDR_MHW(maMonHoc, new_ls_cdrmh));
+        }
+
+        SinhvienW SV_Response = new SinhvienW(
+                sv_object.getString("mssv"),
+                sv_object.getString("tensv"),
+                sv_object.getString("sodt"),
+                sv_object.getString("nienkhoa"),
+                sv_object.getString("passw"),
+                sv_object.getString("maCN"), ls_cdr_khkq, ls_cdr_mh
+        );
+
+        return SV_Response;
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,26 +124,27 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpLogin _httpLogin = null;
-        String UrlPostSV = "http://localhost:8080/ChuanDauRa_API/chuandaura/login/sinhvien";
-        String UrlPostGV = "http://localhost:8080/ChuanDauRa_API/chuandaura/login/giaovien";
+        String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
         Boolean isNQL = null;
         try {
             String password = request.getParameter("yourPassword");
             String _id = request.getParameter("yourId");
             _httpLogin = new HttpLogin(_id, password);
-            Boolean isSV = _httpLogin.httpPostAccout(UrlPostSV);
+            Boolean isSV = _httpLogin.httpPostAccout(URL + "/login/sinhvien");
             if (!isSV) {
-                Boolean isGV = _httpLogin.httpPostAccout(UrlPostGV);
-                if(!isGV){
+                Boolean isGV = _httpLogin.httpPostAccout(URL + "/login/giaovien");
+                if (!isGV) {
                     String errMessge = _httpLogin.getErMessage();
                     response.sendRedirect("index.jsp");
                     //Go to Web Login
-                }else{
-                   isNQL = _httpLogin.isNQL;
-                   //Go to Web GV
-                   response.sendRedirect("WebProfile/giangvien.jsp");
+                } else {
+                    isNQL = _httpLogin.isNQL;
+                    //Go to Web GV
+                    response.sendRedirect("WebProfile/giangvien.jsp");
                 }
-            }else{
+            } else {
+
+                SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + _id));
                 //go to Web Sinh Vien
                 response.sendRedirect("WebProfile/sinhvien.jsp");
             }
@@ -115,16 +166,4 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

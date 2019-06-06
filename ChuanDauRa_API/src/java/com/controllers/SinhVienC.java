@@ -17,7 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import com.main.ConnectDB;
-import com.models.testCDR_KH;
 import com.models.CDR_KH_KQ;
 import com.models.CDR_MH;
 import com.models.ListCDR_MH;
@@ -107,7 +106,7 @@ public class SinhVienC {
     }
 
 
-    public testCDR_KH get_CDR_KH(String maCN,ArrayList<ListCDR_MH> danhSachMonHoc ) throws ClassNotFoundException {
+    public List<CDR_KH_KQ> get_CDR_KH(String maCN,ArrayList<ListCDR_MH> danhSachMonHoc ) throws ClassNotFoundException {
      
         Connection con = null;
         ResultSet rs = null;
@@ -120,7 +119,7 @@ public class SinhVienC {
                 list_cdr.add(new CDR_KH_KQ(rs.getString("CDRKH"), getValueOfCDRKhoaHoc(rs.getString("CDRKH"), danhSachMonHoc)));
                 
             }
-            return new testCDR_KH(list_cdr);
+            return  list_cdr;
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return null;
@@ -338,6 +337,9 @@ public class SinhVienC {
             
     
 }
+
+
+
 
 
 

@@ -36,7 +36,7 @@ public class Sinhvien implements Serializable {
     private String nienkhoa;
     private String passw;
     private String maCN;
-    private testCDR_KH chuanDauRA_KH;
+    private List<CDR_KH_KQ> chuanDauRA_KH;
     private List<ListCDR_MH> listCDR_MH;
 
 
@@ -73,7 +73,7 @@ public class Sinhvien implements Serializable {
         this.maCN = maCN;
     }
 
-    public Sinhvien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, testCDR_KH chuanDauRA_KH) {
+    public Sinhvien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQ> chuanDauRA_KH) {
         this.mssv = mssv;
         this.tensv = tensv;
         this.sodt = sodt;
@@ -82,7 +82,7 @@ public class Sinhvien implements Serializable {
         this.maCN = maCN;
         this.chuanDauRA_KH = chuanDauRA_KH;
     }
-    public Sinhvien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, testCDR_KH chuanDauRA_KH,List<ListCDR_MH> listCDR_MH ) {
+    public Sinhvien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQ> chuanDauRA_KH,List<ListCDR_MH> listCDR_MH ) {
         this.mssv = mssv;
         this.tensv = tensv;
         this.sodt = sodt;
@@ -93,11 +93,11 @@ public class Sinhvien implements Serializable {
         this.listCDR_MH = listCDR_MH;
     }
 
-    public testCDR_KH getChuanDauRA_KH() {
+    public List<CDR_KH_KQ> getChuanDauRA_KH() {
         return chuanDauRA_KH;
     }
 
-    public void setChuanDauRA_KH(testCDR_KH chuanDauRA_KH) {
+    public void setChuanDauRA_KH(List<CDR_KH_KQ> chuanDauRA_KH) {
         this.chuanDauRA_KH = chuanDauRA_KH;
     }
 
@@ -202,6 +202,7 @@ public class Sinhvien implements Serializable {
     }
     
 }
+
 
 
 

@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package com.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,29 +29,42 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Man Pham
  */
-public class Sinhvien implements Serializable {
+public class SinhvienW implements Serializable {
     private String mssv;
     private String tensv;
     private String sodt;
     private String nienkhoa;
     private String passw;
     private String maCN;
-    private CDR_KH chuanDauRA_KH;
+    private List<CDR_KH_KQW> chuanDauRA_KH;
+    private List<ListCDR_MHW> listCDR_MH;
 
-    public Sinhvien() {
+
+
+    public void setListCDR_MH(List<ListCDR_MHW> listCDR_MH) {
+        this.listCDR_MH = listCDR_MH;
     }
 
-    public Sinhvien(String mssv) {
+    public List<ListCDR_MHW> getListCDR_MH() {
+        return listCDR_MH;
+    }
+
+
+    
+    public SinhvienW() {
+    }
+
+    public SinhvienW(String mssv) {
         this.mssv = mssv;
     }
 
-    public Sinhvien(String mssv, String tensv) {
+    public SinhvienW(String mssv, String tensv) {
         this.mssv = mssv;
         this.tensv = tensv;
     }
     
 
-    public Sinhvien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN ) {
+    public SinhvienW(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN ) {
         this.mssv = mssv;
         this.tensv = tensv;
         this.sodt = sodt;
@@ -58,7 +73,7 @@ public class Sinhvien implements Serializable {
         this.maCN = maCN;
     }
 
-    public Sinhvien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, CDR_KH chuanDauRA_KH) {
+    public SinhvienW(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQW> chuanDauRA_KH) {
         this.mssv = mssv;
         this.tensv = tensv;
         this.sodt = sodt;
@@ -67,12 +82,22 @@ public class Sinhvien implements Serializable {
         this.maCN = maCN;
         this.chuanDauRA_KH = chuanDauRA_KH;
     }
+    public SinhvienW(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQW> chuanDauRA_KH,List<ListCDR_MHW> listCDR_MH ) {
+        this.mssv = mssv;
+        this.tensv = tensv;
+        this.sodt = sodt;
+        this.nienkhoa = nienkhoa;
+        this.passw = passw;
+        this.maCN = maCN;
+        this.chuanDauRA_KH = chuanDauRA_KH;
+        this.listCDR_MH = listCDR_MH;
+    }
 
-    public CDR_KH getChuanDauRA_KH() {
+    public List<CDR_KH_KQW> getChuanDauRA_KH() {
         return chuanDauRA_KH;
     }
 
-    public void setChuanDauRA_KH(CDR_KH chuanDauRA_KH) {
+    public void setChuanDauRA_KH(List<CDR_KH_KQW> chuanDauRA_KH) {
         this.chuanDauRA_KH = chuanDauRA_KH;
     }
 
@@ -160,10 +185,11 @@ public class Sinhvien implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sinhvien)) {
+        if (!(object instanceof SinhvienW)) {
             return false;
         }
-        Sinhvien other = (Sinhvien) object;
+        
+        SinhvienW other = (SinhvienW) object;
         if ((this.mssv == null && other.mssv != null) || (this.mssv != null && !this.mssv.equals(other.mssv))) {
             return false;
         }
@@ -176,6 +202,7 @@ public class Sinhvien implements Serializable {
     }
     
 }
+
 
 
 
