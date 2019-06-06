@@ -55,15 +55,10 @@ public class ConnectDB {
         }
     }
 
-    public static Connection getPreparedStatement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public PreparedStatement prepareStatement(String SPsql) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 
 }
+
 
 
