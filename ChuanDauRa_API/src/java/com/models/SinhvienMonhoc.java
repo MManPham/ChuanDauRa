@@ -42,6 +42,16 @@ public class SinhvienMonhoc implements Serializable {
         this.dsChiTietSV = chiTietSV;
     }
 
+    public SinhvienMonhoc(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck) {
+        this.mssv = mssv;
+        this.maLopMH = maLopMH;
+        this.tenLop = tenLop;
+        this.diemqt = diemqt;
+        this.diemgk = diemgk;
+        this.diemth = diemth;
+        this.diemck = diemck;
+    }
+
 
 
     public SinhvienMonhoc(ResultSet rs, String tenLop, ArrayList<ChiTietSV_MH> chiTietSV) throws SQLException {
@@ -121,3 +131,5 @@ public class SinhvienMonhoc implements Serializable {
     
     
 }
+
+

@@ -21,7 +21,6 @@ public class ChiTietSV_MH {
     private int diem;
     private int diemToiDa;
     private String chuanDauRa;
-    private String CDR_KH;
 
     public ChiTietSV_MH(String maDT, String phaLoai, String hocKi, String namHoc, int cau, int diem, int diemToiDa, String chuanDauRa) {
         this.maDT = maDT;
@@ -31,7 +30,6 @@ public class ChiTietSV_MH {
         this.cau = cau;
         this.diem = diem;
         this.diemToiDa = diemToiDa;
-        this.chuanDauRa = chuanDauRa;
     }
     public ChiTietSV_MH(ResultSet rs) throws SQLException
     {
@@ -43,17 +41,7 @@ public class ChiTietSV_MH {
         this.diem = rs.getInt("DIEM");
         this.diemToiDa = rs.getInt("DIEMTOIDA");
         this.chuanDauRa = rs.getString("CDR")+","+ ((float)(this.diem/(this.diemToiDa *1.0))*100) + "%";
-        this.CDR_KH = rs.getString("CDRKH");
     }
-
-    public String getCDR_KH() {
-        return CDR_KH;
-    }
-
-    public void setCDR_KH(String CDR_KH) {
-        this.CDR_KH = CDR_KH;
-    }
-
     public ChiTietSV_MH() {
     }
 
@@ -123,4 +111,7 @@ public class ChiTietSV_MH {
 
     
 }
+
+
+
 

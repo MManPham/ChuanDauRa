@@ -262,6 +262,8 @@ public class SinhVienC {
         }
     }
     
+    
+    
     public float getValueOfCDRKhoaHoc(String CDR_KH, ArrayList<ListCDR_MH> danhSachMonHoc) throws ClassNotFoundException{
         float result = 0;
         Connection con = null;
@@ -337,6 +339,7 @@ public class SinhVienC {
             
     
 }
+
 
 
 

@@ -108,8 +108,8 @@ public class KetQuaHocC {
                         rs.getDouble("DIEMQT"),
                         rs.getDouble("DIEMGK"),
                         rs.getDouble("DIEMTH"),
-                        rs.getDouble("DIEMCK"),
-                        callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
+                        rs.getDouble("DIEMCK")
+                        //callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
                 );
                 listSv.add(newSv);
 
@@ -169,6 +169,10 @@ public class KetQuaHocC {
     }
 
 }
+
+
+
+
 
 
 

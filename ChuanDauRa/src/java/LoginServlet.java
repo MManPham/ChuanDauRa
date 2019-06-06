@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.models.CDR_KH_KQW;
 import com.models.CDR_MHW;
 import com.models.ListCDR_MHW;
+import com.models.SinhvienMonhocW;
 import com.models.SinhvienW;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,6 +29,20 @@ import org.json.JSONObject;
  *
  * @author Man Pham
  */
+class Sortbyroll implements Comparator<CDR_KH_KQW> {
+
+    public int getNumberCdr(String cdr) {
+        int numbCdr = Integer.parseInt(cdr.substring(3));
+        return numbCdr;
+    }
+
+    // Used for sorting in ascending order of 
+    // roll number 
+    public int compare(CDR_KH_KQW a, CDR_KH_KQW b) {
+        return getNumberCdr(a.getChuanDaura()) - getNumberCdr(b.getChuanDaura());
+    }
+}
+
 public class LoginServlet extends HttpServlet {
 
     public SinhvienW getSinhVienJson(String jsonResponse) {
@@ -58,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 
             ls_cdr_mh.add(new ListCDR_MHW(maMonHoc, new_ls_cdrmh));
         }
-
+        Collections.sort(ls_cdr_khkq, new Sortbyroll());
         SinhvienW SV_Response = new SinhvienW(
                 sv_object.getString("mssv"),
                 sv_object.getString("tensv"),
@@ -69,6 +87,33 @@ public class LoginServlet extends HttpServlet {
         );
 
         return SV_Response;
+    }
+
+    public List<SinhvienMonhocW> getSVMHJson(String jsonResponse, List<ListCDR_MHW> listCDR_MH) {
+        List<SinhvienMonhocW> ls_kqmh = new ArrayList<>();
+
+        JSONArray json_ls_kqmh = new JSONArray(jsonResponse.toString());
+        for (int i = 0; i < json_ls_kqmh.length(); i++) {
+            JSONObject chitiet_kqmh = json_ls_kqmh.getJSONObject(i);
+          
+            for (int j = 0; j < listCDR_MH.size(); j++) {
+                if (listCDR_MH.get(i).getMaMon() == listCDR_MH.get(i).getMaMon()) {
+                    SinhvienMonhocW new_sv_mh = new SinhvienMonhocW(
+                            chitiet_kqmh.getString("mssv"),
+                            chitiet_kqmh.getString("maLopMH"),
+                            chitiet_kqmh.getString("tenLop"),
+                            chitiet_kqmh.getDouble("diemqt"),
+                            chitiet_kqmh.getDouble("diemgk"),
+                            chitiet_kqmh.getDouble("diemth"),
+                            chitiet_kqmh.getDouble("diemck"), listCDR_MH.get(i));
+                    ls_kqmh.add(new_sv_mh);
+                    break;
+                }
+
+            }
+        }
+
+        return ls_kqmh;
     }
 
     /**
@@ -145,6 +190,12 @@ public class LoginServlet extends HttpServlet {
             } else {
 
                 SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + _id));
+                List<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + _id), SV_Response.getListCDR_MH());
+
+                HttpSession session = request.getSession();
+                session.setAttribute("sinhvien", SV_Response);
+                session.setAttribute("ketquaHT", LS_SV_MH);
+
                 //go to Web Sinh Vien
                 response.sendRedirect("WebProfile/sinhvien.jsp");
             }
@@ -166,4 +217,7 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+
 

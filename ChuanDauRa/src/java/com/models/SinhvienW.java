@@ -149,31 +149,7 @@ public class SinhvienW implements Serializable {
         this.maCN = maCN;
     }
 
-//    @XmlTransient
-//    public Collection<SinhvienMonhoc> getSinhvienMonhocCollection() {
-//        return sinhvienMonhocCollection;
-//    }
-//
-//    public void setSinhvienMonhocCollection(Collection<SinhvienMonhoc> sinhvienMonhocCollection) {
-//        this.sinhvienMonhocCollection = sinhvienMonhocCollection;
-//    }
-//
-//    public Chuyennganh getMachuyennganh() {
-//        return machuyennganh;
-//    }
-//
-//    public void setMachuyennganh(Chuyennganh machuyennganh) {
-//        this.machuyennganh = machuyennganh;
-//    }
-//
-//    @XmlTransient
-//    public Collection<Ketquathi> getKetquathiCollection() {
-//        return ketquathiCollection;
-//    }
-//
-//    public void setKetquathiCollection(Collection<Ketquathi> ketquathiCollection) {
-//        this.ketquathiCollection = ketquathiCollection;
-//    }
+
 
     @Override
     public int hashCode() {
@@ -202,6 +178,7 @@ public class SinhvienW implements Serializable {
     }
     
 }
+
 
 
 

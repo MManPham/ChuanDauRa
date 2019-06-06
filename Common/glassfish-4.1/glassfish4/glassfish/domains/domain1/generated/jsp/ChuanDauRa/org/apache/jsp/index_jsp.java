@@ -77,10 +77,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </div>\n");
       out.write("                    <form id=\"Login\" action=\"LoginServlet\" method=\"POST\">\n");
       out.write("                        <div class=\"form-group\">\n");
-      out.write("                            <input type=\"text\" name=\"yourId\" class=\"form-control\" id=\"inputEmail\" placeholder=\"VD: 16521805\">\n");
+      out.write("                            <input type=\"text\" name=\"yourId\" class=\"form-control\" id=\"inputEmail\" value =\"12340001\" placeholder=\"VD: 16521805\">\n");
       out.write("                        </div>\n");
       out.write("                        <div class=\"form-group\">\n");
-      out.write("                            <input type=\"password\" name=\"yourPassword\" class=\"form-control\" id=\"inputPassword\" placeholder=\"Mật khẩu\">\n");
+      out.write("                            <input type=\"password\" name=\"yourPassword\" class=\"form-control\" id=\"inputPassword\" value=\"Pass\" placeholder=\"Mật khẩu\">\n");
       out.write("                        </div>\n");
       out.write("                        <input type=\"checkbox\"> Ghi nhớ tài khoản\n");
       out.write("                        <button type=\"submit\" class=\"btn btn-primary\">Đăng nhập</button>\n");
