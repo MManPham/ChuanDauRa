@@ -27,7 +27,6 @@ import javax.ws.rs.PathParam;
 @Path("ketquahoc")
 public class KetQuaHocC {
 
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<SinhvienMonhoc> getDataJson() throws ClassNotFoundException, SQLException {
@@ -46,7 +45,8 @@ public class KetQuaHocC {
                         rs.getDouble("DIEMGK"),
                         rs.getDouble("DIEMTH"),
                         rs.getDouble("DIEMCK"),
-                        callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
+                         rs.getInt("TINCHI")
+                        //callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
                 );
                 listSv.add(newSvMh);
             }
@@ -72,7 +72,7 @@ public class KetQuaHocC {
         ResultSet rs = null;
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT * FROM LOPMONHOC WHERE MALOPMH = 'IE204.I32'").executeQuery();
+            rs = con.prepareStatement("SELECT * FROM LOPMONHOC WHERE MALOPMH = '" + maLopMH + "'").executeQuery();
             while (rs.next()) {
                 TenLop = rs.getNString("TENLOPMH");
             }
@@ -99,7 +99,9 @@ public class KetQuaHocC {
         ResultSet rs = null;
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT * FROM SINHVIEN_MONHOC WHERE MSSV = " + mssv).executeQuery();
+            rs = con.prepareStatement("SELECT SVMH.MSSV,SVMH.MALOPMH,SVMH.DIEMQT,SVMH.DIEMGK,SVMH.DIEMTH,SVMH.DIEMCK,MONHOC.TINCHI\n"
+                    + "FROM SINHVIEN_MONHOC SVMH, MONHOC,LOPMONHOC \n"
+                    + "WHERE MSSV = '"+mssv+"' AND SVMH.MALOPMH= LOPMONHOC.MALOPMH AND LOPMONHOC.MAMON = MONHOC.MAMH").executeQuery();
             while (rs.next()) {
                 SinhvienMonhoc newSv = new SinhvienMonhoc(
                         rs.getString("MSSV"),
@@ -108,8 +110,10 @@ public class KetQuaHocC {
                         rs.getDouble("DIEMQT"),
                         rs.getDouble("DIEMGK"),
                         rs.getDouble("DIEMTH"),
-                        rs.getDouble("DIEMCK")
-                        //callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
+                        rs.getDouble("DIEMCK"),
+                        rs.getInt("TINCHI")
+                //callProcedure("PROC_IN_MSSV_MAMH_KQ", rs.getString("MSSV"), rs.getString("MALOPMH"))
+
                 );
                 listSv.add(newSv);
 
@@ -169,7 +173,6 @@ public class KetQuaHocC {
     }
 
 }
-
 
 
 

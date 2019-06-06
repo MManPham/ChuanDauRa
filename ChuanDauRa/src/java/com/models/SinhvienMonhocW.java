@@ -25,6 +25,7 @@ public class SinhvienMonhocW implements Serializable {
     private Double diemgk;
     private Double diemth;
     private Double diemck;
+    private int tinChi;
     private ArrayList<ChiTietSV_MH> dsChiTietSV;
     private ListCDR_MHW listCDR_MH;
 
@@ -33,7 +34,7 @@ public class SinhvienMonhocW implements Serializable {
     public SinhvienMonhocW() {
     }
 
-    public SinhvienMonhocW(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, ListCDR_MHW listCDR_MH) {
+    public SinhvienMonhocW(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck,int tinChi, ListCDR_MHW listCDR_MH) {
         this.mssv = mssv;
         this.maLopMH = maLopMH;
         this.tenLop = tenLop;
@@ -41,6 +42,7 @@ public class SinhvienMonhocW implements Serializable {
         this.diemgk = diemgk;
         this.diemth = diemth;
         this.diemck = diemck;
+        this.tinChi = tinChi;
         this.listCDR_MH = listCDR_MH;
     }
 
@@ -150,7 +152,18 @@ public class SinhvienMonhocW implements Serializable {
         this.mssv = malopmh;
     }
 
+    public int getTinChi() {
+        return tinChi;
+    }
+
+    public void setTinChi(int tinChi) {
+        this.tinChi = tinChi;
+    }
+
 }
+
+
+
 
 
 

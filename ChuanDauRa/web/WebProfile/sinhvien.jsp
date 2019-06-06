@@ -67,9 +67,11 @@
                         <button class="btn-info">Xem</button><br>
                         </hr>
                         <c:forEach items="${ketquaHT}"  var="kq_mh" >
-                            <div class="thumbnail card m-2">
-
-                                <p>- Tên môn học chuyên nghành:<span> <c:out value = "${kq_mh.getTenLop()}"/></span> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; -Số tín chỉ: </p>
+                            <div class="thumbnail card m-2 row">
+                                <div class="d-flex justify-content-between p-2 pb-0">
+                                    <p>Tên môn học chuyên nghành:<span> <c:out value = "${kq_mh.getTenLop()}"/></span> </p>
+                                    <p>Số tín chỉ: <span> <c:out value = "${kq_mh.getTinChi()}"/></span></p>
+                                </div>
                                 <p>- Kết quả học tập</p>
                                 <div class="table-responsive" id="sailorTableArea">
                                     <table id="sailorTable" class="table table-striped table-bordered" width="100%">
@@ -106,10 +108,13 @@
                                                 <th>Chuyên nghành</th>
                                             </tr>
                                         </thead>
-                                 
                                         <tbody>
-
-
+                                            <c:forEach items="${kq_mh.getListCDR_MH().getDanhSach_CDR_CN()}"  var="cdr_mh" >
+                                                <tr>
+                                                    <td><c:out value = "${cdr_mh.getChuanDauRaMonHoc()}"/>  <c:out value = "${cdr_mh.getKetQua()}"/>%</td>
+                                                    <td></td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -131,10 +136,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${sinhvien.chuanDauRA_KH}"  var="test" >
+                                <c:forEach items="${sinhvien.chuanDauRA_KH}"  var="cdr_kh" >
                                     <tr>
-                                        <td><c:out value = "${test.getChuanDaura().toString()}"/></td>
-                                        <td><c:out value = "${test.getKetQua().toString()}"/></td>
+                                        <td><c:out value = "${cdr_kh.getChuanDaura().toString()}"/></td>
+                                        <td><c:out value = "${cdr_kh.getKetQua().toString()}"/></td>
                                     </tr>
                                 </c:forEach>
 

@@ -15,7 +15,6 @@ import javax.persistence.Column;
  *
  * @author Man Pham
  */
-
 public class SinhvienMonhoc implements Serializable {
 
     private String mssv;
@@ -25,21 +24,10 @@ public class SinhvienMonhoc implements Serializable {
     private Double diemgk;
     private Double diemth;
     private Double diemck;
+    private int tinChi;
     private ArrayList<ChiTietSV_MH> dsChiTietSV;
-    
 
     public SinhvienMonhoc() {
-    }
-
-    public SinhvienMonhoc(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, ArrayList<ChiTietSV_MH> chiTietSV) {
-        this.mssv = mssv;
-        this.maLopMH = maLopMH;
-        this.tenLop = tenLop;
-        this.diemqt = diemqt;
-        this.diemgk = diemgk;
-        this.diemth = diemth;
-        this.diemck = diemck;
-        this.dsChiTietSV = chiTietSV;
     }
 
     public SinhvienMonhoc(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck) {
@@ -52,11 +40,20 @@ public class SinhvienMonhoc implements Serializable {
         this.diemck = diemck;
     }
 
-
+    public SinhvienMonhoc(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, int tinChi) {
+        this.mssv = mssv;
+        this.maLopMH = maLopMH;
+        this.tenLop = tenLop;
+        this.diemqt = diemqt;
+        this.diemgk = diemgk;
+        this.diemth = diemth;
+        this.diemck = diemck;
+        this.tinChi = tinChi;
+    }
 
     public SinhvienMonhoc(ResultSet rs, String tenLop, ArrayList<ChiTietSV_MH> chiTietSV) throws SQLException {
         this.mssv = rs.getString("MSSV");
-        this.maLopMH =  rs.getString("MALOPMH");
+        this.maLopMH = rs.getString("MALOPMH");
         this.tenLop = tenLop;
         this.diemqt = rs.getDouble("DIEMQT");
         this.diemgk = rs.getDouble("DIEMGK");
@@ -77,10 +74,10 @@ public class SinhvienMonhoc implements Serializable {
         return dsChiTietSV;
     }
 
-    public void setChiTietSV( ArrayList<ChiTietSV_MH> chiTietSV) {
+    public void setChiTietSV(ArrayList<ChiTietSV_MH> chiTietSV) {
         this.dsChiTietSV = chiTietSV;
     }
-    
+
     public Double getDiemqt() {
         return diemqt;
     }
@@ -120,16 +117,32 @@ public class SinhvienMonhoc implements Serializable {
     public void setMssv(String mssv) {
         this.mssv = mssv;
     }
-    
-     public String getMaLopMH() {
+
+    public String getMaLopMH() {
         return this.maLopMH;
     }
 
     public void setMaLopMH(String malopmh) {
         this.mssv = malopmh;
     }
-    
-    
-}
 
+    public int getTinChi() {
+        return tinChi;
+    }
+
+    public void setTinChi(int tinChi) {
+        this.tinChi = tinChi;
+    }
+
+    public ArrayList<ChiTietSV_MH> getDsChiTietSV() {
+        return dsChiTietSV;
+    }
+
+    public void setDsChiTietSV(ArrayList<ChiTietSV_MH> dsChiTietSV) {
+        this.dsChiTietSV = dsChiTietSV;
+    }
+
+
+
+}
 

@@ -67,9 +67,10 @@ public class LoginServlet extends HttpServlet {
 
             JSONArray danhSach_CDR_CN = cdrmh_object.getJSONArray("danhSach_CDR_CN");
             List<CDR_MHW> new_ls_cdrmh = new ArrayList<>();
+
             for (int j = 0; j < danhSach_CDR_CN.length(); j++) {
-                String chuanDauRaMonHoc = danhSach_CDR_CN.getJSONObject(i).getString("chuanDauRaMonHoc");
-                float ketQua = danhSach_CDR_CN.getJSONObject(i).getFloat("ketQua");
+                String chuanDauRaMonHoc = danhSach_CDR_CN.getJSONObject(j).getString("chuanDauRaMonHoc");
+                float ketQua = danhSach_CDR_CN.getJSONObject(j).getFloat("ketQua");
                 CDR_MHW cdrmh = new CDR_MHW(chuanDauRaMonHoc, ketQua);
                 new_ls_cdrmh.add(cdrmh);
             }
@@ -95,9 +96,10 @@ public class LoginServlet extends HttpServlet {
         JSONArray json_ls_kqmh = new JSONArray(jsonResponse.toString());
         for (int i = 0; i < json_ls_kqmh.length(); i++) {
             JSONObject chitiet_kqmh = json_ls_kqmh.getJSONObject(i);
-          
+
             for (int j = 0; j < listCDR_MH.size(); j++) {
-                if (listCDR_MH.get(i).getMaMon() == listCDR_MH.get(i).getMaMon()) {
+                Boolean test = listCDR_MH.get(i).getMaMon().equals(chitiet_kqmh.getString("maLopMH"));
+                if (listCDR_MH.get(i).getMaMon().equals(chitiet_kqmh.getString("maLopMH"))) {
                     SinhvienMonhocW new_sv_mh = new SinhvienMonhocW(
                             chitiet_kqmh.getString("mssv"),
                             chitiet_kqmh.getString("maLopMH"),
@@ -105,7 +107,9 @@ public class LoginServlet extends HttpServlet {
                             chitiet_kqmh.getDouble("diemqt"),
                             chitiet_kqmh.getDouble("diemgk"),
                             chitiet_kqmh.getDouble("diemth"),
-                            chitiet_kqmh.getDouble("diemck"), listCDR_MH.get(i));
+                            chitiet_kqmh.getDouble("diemck"),
+                            chitiet_kqmh.getInt("tinChi"),
+                            listCDR_MH.get(i));
                     ls_kqmh.add(new_sv_mh);
                     break;
                 }
@@ -190,7 +194,7 @@ public class LoginServlet extends HttpServlet {
             } else {
 
                 SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + _id));
-                List<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + _id), SV_Response.getListCDR_MH());
+                    List<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + _id), SV_Response.getListCDR_MH());
 
                 HttpSession session = request.getSession();
                 session.setAttribute("sinhvien", SV_Response);
@@ -217,7 +221,6 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
 
 
 
