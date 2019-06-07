@@ -37,7 +37,7 @@
                     </div>
                     <form id="Login" action="LoginServlet" method="POST">
                         <div class="form-group">
-                            <input type="text" name="yourId" class="form-control" id="inputEmail" value ="12340001" placeholder="VD: 16521805">
+                            <input type="text" name="yourId" class="form-control" id="inputEmail" value ="GV0001" placeholder="VD: 16521805">
                         </div>
                         <div class="form-group">
                             <input type="password" name="yourPassword" class="form-control" id="inputPassword" value="Pass" placeholder="Mật khẩu">

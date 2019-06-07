@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.controllers;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,14 +11,9 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import com.models.GiangVien;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import com.main.ConnectDB;
-import com.models.CDR_KH_KQ;
-import com.models.CDR_MH;
-import com.models.ListCDR_MH;
 import com.models.Lop_CN;
 import com.models.Lop_MH;
 import com.models.Sinhvien;
@@ -33,7 +27,6 @@ import javax.ws.rs.PathParam;
  */
 @Path("giangvien")
 public class GiangVienC {
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<GiangVien> getAllSV() throws ClassNotFoundException, SQLException {
@@ -65,7 +58,6 @@ public class GiangVienC {
                 ex.printStackTrace();
             }
         }
-
     }
 
     @GET
@@ -148,7 +140,6 @@ public class GiangVienC {
                 ex.printStackTrace();
             }
         }
-
     }
 
     public List<Sinhvien> getSVs_inClassCN(String maLop) throws ClassNotFoundException, SQLException {
@@ -185,10 +176,15 @@ public class GiangVienC {
                 ex.printStackTrace();
             }
         }
-
     }
-
 }
+
+
+
+
+
+
+
 
 
 

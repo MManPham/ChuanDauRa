@@ -19,7 +19,7 @@ public class CDR_MHW {
     
     public CDR_MHW(String chuanDauRaMonHoc, float ketQua) {
         this.chuanDauRaMonHoc = chuanDauRaMonHoc;
-        this.ketQua = (float) (Math.floor(ketQua *10)/10);
+        this.ketQua = (float)(Math.floor(ketQua *10)/10);
     }
 
     public void setChuanDauRaMonHoc(String chuanDauRaMonHoc) {
@@ -38,6 +38,7 @@ public class CDR_MHW {
         return ketQua;
     }
 }
+
 
 
 

@@ -33,6 +33,8 @@ public class GiangVien {
     public GiangVien(String maSoGiangVien, String tenGiangVien) {
         this.maSoGiangVien = maSoGiangVien;
         this.tenGiangVien = tenGiangVien;
+        this.danhSachLopCN = null;
+        this.danhSachLopMH = null;
     }
 
     public void setMaSoGiangVien(String maSoGiangVien) {
@@ -72,6 +74,7 @@ public class GiangVien {
     
     
 }
+
 
 
 
