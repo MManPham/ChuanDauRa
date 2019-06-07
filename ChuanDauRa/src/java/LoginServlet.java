@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.models.CDR_KH_KQW;
 import com.models.CDR_MHW;
+import com.models.GiangVienW;
 import com.models.ListCDR_MHW;
+import com.models.Lop_MHW;
 import com.models.SinhvienMonhocW;
 import com.models.SinhvienW;
 import java.util.ArrayList;
@@ -90,34 +92,75 @@ public class LoginServlet extends HttpServlet {
         return SV_Response;
     }
 
-    public List<SinhvienMonhocW> getSVMHJson(String jsonResponse, List<ListCDR_MHW> listCDR_MH) {
+    public List<SinhvienMonhocW> getSVMHJson(JSONArray json_ls_kqmh, Boolean isSV) {
         List<SinhvienMonhocW> ls_kqmh = new ArrayList<>();
 
-        JSONArray json_ls_kqmh = new JSONArray(jsonResponse.toString());
         for (int i = 0; i < json_ls_kqmh.length(); i++) {
             JSONObject chitiet_kqmh = json_ls_kqmh.getJSONObject(i);
 
-            for (int j = 0; j < listCDR_MH.size(); j++) {
-                Boolean test = listCDR_MH.get(i).getMaMon().equals(chitiet_kqmh.getString("maLopMH"));
-                if (listCDR_MH.get(i).getMaMon().equals(chitiet_kqmh.getString("maLopMH"))) {
-                    SinhvienMonhocW new_sv_mh = new SinhvienMonhocW(
-                            chitiet_kqmh.getString("mssv"),
-                            chitiet_kqmh.getString("maLopMH"),
-                            chitiet_kqmh.getString("tenLop"),
-                            chitiet_kqmh.getDouble("diemqt"),
-                            chitiet_kqmh.getDouble("diemgk"),
-                            chitiet_kqmh.getDouble("diemth"),
-                            chitiet_kqmh.getDouble("diemck"),
-                            chitiet_kqmh.getInt("tinChi"),
-                            listCDR_MH.get(i));
-                    ls_kqmh.add(new_sv_mh);
-                    break;
-                }
-
+            JSONArray danhSach_CDR_CN = chitiet_kqmh.getJSONArray("listCDR_MH");
+            List<CDR_MHW> new_ls_cdrmh = new ArrayList<>();
+            for (int j = 0; j < danhSach_CDR_CN.length(); j++) {
+                String chuanDauRaMonHoc = danhSach_CDR_CN.getJSONObject(j).getString("chuanDauRaMonHoc");
+                float ketQua = danhSach_CDR_CN.getJSONObject(j).getFloat("ketQua");
+                CDR_MHW cdrmh = new CDR_MHW(chuanDauRaMonHoc, ketQua);
+                new_ls_cdrmh.add(cdrmh);
+            }
+            if (isSV) {
+                SinhvienMonhocW new_sv_mh = new SinhvienMonhocW(
+                        chitiet_kqmh.getString("maLopMH"),
+                        chitiet_kqmh.getString("tenLop"),
+                        chitiet_kqmh.getDouble("diemqt"),
+                        chitiet_kqmh.getDouble("diemgk"),
+                        chitiet_kqmh.getDouble("diemth"),
+                        chitiet_kqmh.getDouble("diemck"),
+                        chitiet_kqmh.getInt("tinChi"),
+                        new_ls_cdrmh);
+                ls_kqmh.add(new_sv_mh);
+            } else {
+                SinhvienMonhocW new_sv_mh = new SinhvienMonhocW(
+                        chitiet_kqmh.getString("mssv"),
+                        chitiet_kqmh.getString("tenSV"),
+                        chitiet_kqmh.getDouble("diemqt"),
+                        chitiet_kqmh.getDouble("diemgk"),
+                        chitiet_kqmh.getDouble("diemth"),
+                        chitiet_kqmh.getDouble("diemck"),
+                        new_ls_cdrmh);
+                ls_kqmh.add(new_sv_mh);
             }
         }
 
         return ls_kqmh;
+    }
+
+    public GiangVienW getGiangVienJson(String jsonResponse) {
+        GiangVienW gv_return = new GiangVienW();
+        JSONObject json_gv = new JSONObject(jsonResponse.toString());
+
+        gv_return.setMaSoGiangVien(json_gv.getString("maSoGiangVien"));
+        gv_return.setTenGiangVien(json_gv.getString("tenGiangVien"));
+
+        List<Lop_MHW> ds_lopmh = new ArrayList<>();
+        JSONArray json_ds_lopmh = json_gv.getJSONArray("danhSachLopMH");
+        if (json_ds_lopmh.isEmpty()) {
+            ds_lopmh = null;
+        } else {
+            for (int i = 0; i < json_ds_lopmh.length(); i++) {
+                JSONObject json_lopmh = json_ds_lopmh.getJSONObject(i);
+
+                Lop_MHW lopmh = new Lop_MHW();
+                lopmh.setTen_Lop(json_lopmh.getString("ten_Lop"));
+                lopmh.setMa_Lop(json_lopmh.getString("ma_Lop"));
+
+                JSONArray json_ds_svmh = json_lopmh.getJSONArray("ds_SV");
+                List<SinhvienMonhocW> ds_svmh = this.getSVMHJson(json_ds_svmh, false);
+                lopmh.setDs_SV(ds_svmh);
+
+                ds_lopmh.add(lopmh);
+            }
+        }
+        gv_return.setDanhSachLopMH(ds_lopmh);
+        return gv_return;
     }
 
     /**
@@ -188,13 +231,18 @@ public class LoginServlet extends HttpServlet {
                     //Go to Web Login
                 } else {
                     isNQL = _httpLogin.isNQL;
+                    GiangVienW GV_Response = this.getGiangVienJson(_httpLogin.httpGetAccout(URL + "/giangvien/" + _id));
+
+                    HttpSession session = request.getSession();
+                    session.setAttribute("giangvien", GV_Response);
                     //Go to Web GV
                     response.sendRedirect("WebProfile/giangvien.jsp");
                 }
             } else {
 
                 SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + _id));
-                    List<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + _id), SV_Response.getListCDR_MH());
+                JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + _id));
+                List<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
 
                 HttpSession session = request.getSession();
                 session.setAttribute("sinhvien", SV_Response);
@@ -221,6 +269,4 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
 

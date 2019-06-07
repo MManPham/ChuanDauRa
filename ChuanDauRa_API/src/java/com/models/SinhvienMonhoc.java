@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 
 /**
@@ -18,6 +19,7 @@ import javax.persistence.Column;
 public class SinhvienMonhoc implements Serializable {
 
     private String mssv;
+    private String tenSV;
     private String maLopMH;
     private String tenLop;
     private Double diemqt;
@@ -26,22 +28,23 @@ public class SinhvienMonhoc implements Serializable {
     private Double diemck;
     private int tinChi;
     private ArrayList<ChiTietSV_MH> dsChiTietSV;
+    private List<CDR_MH> listCDR_MH;
 
     public SinhvienMonhoc() {
     }
 
-    public SinhvienMonhoc(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck) {
+    public SinhvienMonhoc(String mssv, String tenSV, Double diemqt, Double diemgk, Double diemth, Double diemck, List<CDR_MH> listCDR_MH) {
         this.mssv = mssv;
-        this.maLopMH = maLopMH;
-        this.tenLop = tenLop;
+        this.tenSV = tenSV;
         this.diemqt = diemqt;
         this.diemgk = diemgk;
         this.diemth = diemth;
         this.diemck = diemck;
+        this.listCDR_MH = listCDR_MH;
     }
 
-    public SinhvienMonhoc(String mssv, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, int tinChi) {
-        this.mssv = mssv;
+
+    public SinhvienMonhoc( String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, int tinChi, List<CDR_MH> listCDR_MH) {
         this.maLopMH = maLopMH;
         this.tenLop = tenLop;
         this.diemqt = diemqt;
@@ -49,17 +52,7 @@ public class SinhvienMonhoc implements Serializable {
         this.diemth = diemth;
         this.diemck = diemck;
         this.tinChi = tinChi;
-    }
-
-    public SinhvienMonhoc(ResultSet rs, String tenLop, ArrayList<ChiTietSV_MH> chiTietSV) throws SQLException {
-        this.mssv = rs.getString("MSSV");
-        this.maLopMH = rs.getString("MALOPMH");
-        this.tenLop = tenLop;
-        this.diemqt = rs.getDouble("DIEMQT");
-        this.diemgk = rs.getDouble("DIEMGK");
-        this.diemth = rs.getDouble("DIEMTH");
-        this.diemck = rs.getDouble("DIEMCK");
-        this.dsChiTietSV = chiTietSV;
+        this.listCDR_MH = listCDR_MH;
     }
 
     public String getTenLop() {
@@ -142,7 +135,33 @@ public class SinhvienMonhoc implements Serializable {
         this.dsChiTietSV = dsChiTietSV;
     }
 
+    public List<CDR_MH> getListCDR_MH() {
+        return listCDR_MH;
+    }
 
+    public void setListCDR_MH(List<CDR_MH> listCDR_MH) {
+        this.listCDR_MH = listCDR_MH;
+    }
+
+    public String getTenSV() {
+        return tenSV;
+    }
+
+    public void setTenSV(String tenSV) {
+        this.tenSV = tenSV;
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

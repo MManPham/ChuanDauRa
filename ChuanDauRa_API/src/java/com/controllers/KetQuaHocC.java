@@ -33,20 +33,21 @@ public class KetQuaHocC {
         List<SinhvienMonhoc> listSv = new ArrayList<>();
         Connection con = null;
         ResultSet rs = null;
+        SinhVienC sv_C = new SinhVienC();
         try {
             con = ConnectDB.makeConnect();
             rs = con.prepareStatement("SELECT * FROM SINHVIEN_MONHOC").executeQuery();
             while (rs.next()) {
                 SinhvienMonhoc newSvMh = new SinhvienMonhoc(
-                        rs.getString("MSSV"),
                         rs.getString("MALOPMH"),
                         getNameLopMH(rs.getString("MALOPMH")),
                         rs.getDouble("DIEMQT"),
                         rs.getDouble("DIEMGK"),
                         rs.getDouble("DIEMTH"),
                         rs.getDouble("DIEMCK"),
-                         rs.getInt("TINCHI")
-                        //callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
+                        rs.getInt("TINCHI"),
+                        sv_C.getCDR_MH(rs.getString("MSSV"), rs.getString("MAMH"))
+                //callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
                 );
                 listSv.add(newSvMh);
             }
@@ -97,23 +98,24 @@ public class KetQuaHocC {
         List<SinhvienMonhoc> listSv = new ArrayList<>();
         Connection con = null;
         ResultSet rs = null;
+        SinhVienC sv_C = new SinhVienC();
+
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT SVMH.MSSV,SVMH.MALOPMH,SVMH.DIEMQT,SVMH.DIEMGK,SVMH.DIEMTH,SVMH.DIEMCK,MONHOC.TINCHI\n"
+            rs = con.prepareStatement("SELECT SVMH.MSSV,MONHOC.MAMH,SVMH.MALOPMH,SVMH.DIEMQT,SVMH.DIEMGK,SVMH.DIEMTH,SVMH.DIEMCK,MONHOC.TINCHI\n"
                     + "FROM SINHVIEN_MONHOC SVMH, MONHOC,LOPMONHOC \n"
-                    + "WHERE MSSV = '"+mssv+"' AND SVMH.MALOPMH= LOPMONHOC.MALOPMH AND LOPMONHOC.MAMON = MONHOC.MAMH").executeQuery();
+                    + "WHERE MSSV = '" + mssv + "' AND SVMH.MALOPMH= LOPMONHOC.MALOPMH AND LOPMONHOC.MAMON = MONHOC.MAMH").executeQuery();
             while (rs.next()) {
                 SinhvienMonhoc newSv = new SinhvienMonhoc(
-                        rs.getString("MSSV"),
                         rs.getString("MALOPMH"),
                         getNameLopMH(rs.getString("MALOPMH")),
                         rs.getDouble("DIEMQT"),
                         rs.getDouble("DIEMGK"),
                         rs.getDouble("DIEMTH"),
                         rs.getDouble("DIEMCK"),
-                        rs.getInt("TINCHI")
+                        rs.getInt("TINCHI"),
+                        sv_C.getCDR_MH(rs.getString("MSSV"), rs.getString("MAMH"))
                 //callProcedure("PROC_IN_MSSV_MAMH_KQ", rs.getString("MSSV"), rs.getString("MALOPMH"))
-
                 );
                 listSv.add(newSv);
 
@@ -173,9 +175,6 @@ public class KetQuaHocC {
     }
 
 }
-
-
-
 
 
 

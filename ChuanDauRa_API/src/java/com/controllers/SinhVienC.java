@@ -30,6 +30,9 @@ import javax.ws.rs.PathParam;
 @Path("sinhvien")
 public class SinhVienC {
 
+    public SinhVienC() {
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Sinhvien> getAllSV() throws ClassNotFoundException, SQLException {
@@ -337,4 +340,7 @@ public class SinhVienC {
     }
 
 }
+
+
+
 

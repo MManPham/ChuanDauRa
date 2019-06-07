@@ -109,7 +109,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${kq_mh.getListCDR_MH().getDanhSach_CDR_CN()}"  var="cdr_mh" >
+                                            <c:forEach items="${kq_mh.getListCDR_MH()}"  var="cdr_mh" >
                                                 <tr>
                                                     <td><c:out value = "${cdr_mh.getChuanDauRaMonHoc()}"/>  <c:out value = "${cdr_mh.getKetQua()}"/>%</td>
                                                     <td></td>
