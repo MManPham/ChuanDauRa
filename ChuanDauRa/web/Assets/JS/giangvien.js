@@ -1,7 +1,13 @@
 $(document).ready(() => {
-    let mydata = '';
+    let data = '';
 
 
+
+    $('.list-gv > button').click(function (e) {
+        // find/remove all active classes from each a
+        $('.list-gv > button').removeClass('active');
+        $(this).addClass('active');
+    });
     myWeb = {
         Views: {
             displayLopMH: (index, sinhvien) => {
@@ -70,8 +76,8 @@ $(document).ready(() => {
                         data: {id: id},
                         url: 'http://localhost:8080/ChuanDauRa/AjaxTruongKhoa',
                         success: (result) => {
-                            mydata = JSON.parse(result);
-                            let data = mydata;
+                            myWeb.Modals.data = JSON.parse(result);
+                            let data = myWeb.Modals.data;
                             console.log(data);
                             if (data.danhSachLopMH) {
                                 $('#ds_sv_lmh').empty();
@@ -89,22 +95,22 @@ $(document).ready(() => {
             },
             toggleLopMH: () => {
                 $('#title-mh').click(() => {
-                    if (myWeb.Modals.toggleLopMH === true)
-                        $('div#_mh-content').show();
-                    else
-                        $('div#_mh-content').hide()
-                    myWeb.Modals.toggleLopMH = !myWeb.Modals.toggleLopMH;
+                        if (myWeb.Modals.toggleLopMH === true)
+                            $('div#_mh-content').show();
+                        else
+                            $('div#_mh-content').hide()
+                        myWeb.Modals.toggleLopMH = !myWeb.Modals.toggleLopMH;
                 });
 
             },
             toggleLopCN: () => {
                 $('#title-cn').click(() => {
-                    if (myWeb.Modals.toggleLopCN === true)
-                        $('div#_cn-content').show();
-                    else
-                        $('div#_cn-content').hide();
-                    myWeb.Modals.toggleLopCN = !myWeb.Modals.toggleLopCN;
-
+                    console.log(myWeb.Modals.data)
+                        if (myWeb.Modals.toggleLopCN === true)
+                            $('div#_cn-content').show();
+                        else
+                            $('div#_cn-content').hide();
+                        myWeb.Modals.toggleLopCN = !myWeb.Modals.toggleLopCN;
                 })
             }
         }
@@ -123,10 +129,6 @@ $(document).ready(() => {
     }
     window.onload = main();
 })
-
-
-
-
 
 
 

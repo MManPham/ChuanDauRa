@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <title>Sinh Vien</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../Assets/Css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="Assets/Css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-info text-light py-3 main-nav">
@@ -23,14 +23,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                <label class="ml-auto mr-2  text-light mb-0">Nguyen Van A</label>|&nbsp;
-                <a href="#" class=" text-light"> Đăng xuất</a>
+                <label class="ml-auto mr-2  text-light mb-0">${sinhvien.tensv}</label>|&nbsp;
+                
+                <form action="logoutServlet" method="GET">
+                    <input type="submit" class="btn" value ="Đăng xuất"/>
+                </form>
 
             </div>
         </nav>
     </header>
     <body style=" background: #ccf5ff;">
         <%
+            response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
             if (session.getAttribute("sinhvien") == null) {
                 response.sendRedirect("index.jsp");
             }
@@ -169,3 +173,17 @@
     </footer>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

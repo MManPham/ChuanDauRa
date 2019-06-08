@@ -198,11 +198,10 @@ public class LoginServlet extends HttpServlet {
                     GiangVienW GV_Response = this.getGiangVienJson(_httpLogin.httpGetAccout(URL + "/giangvien/" + _id));
 
                     session.setAttribute("giangvien", GV_Response);
-                    session.setAttribute("test", "minhman");
                     session.setAttribute("isNQL", isNQL);
 
                     //Go to Web GV
-                    response.sendRedirect("WebProfile/giangvien.jsp");
+                    response.sendRedirect("giangvien.jsp");
                 }
             } else {
 
@@ -216,7 +215,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("ketquaHT", LS_SV_MH);
 
                 //go to Web Sinh Vien
-                response.sendRedirect("WebProfile/sinhvien.jsp");
+                response.sendRedirect("sinhvien.jsp");
             }
 
         } catch (Exception e) {
@@ -235,6 +234,9 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+
 
 
 

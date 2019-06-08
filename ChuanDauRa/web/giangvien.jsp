@@ -11,11 +11,11 @@
     <head>
         <meta charset="utf-8">
         <title>GiangVien</title>
-        <link href="../Assets/Css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="Assets/Css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="../Assets/JS/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script src="Assets/JS/jquery-3.4.1.min.js" type="text/javascript"></script>
 
-        <script src="../Assets/JS/giangvien.js" type="text/javascript"></script>
+        <script src="Assets/JS/giangvien.js" type="text/javascript"></script>
 
     </head>
     <header>
@@ -26,8 +26,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <label class="ml-auto mr-2  text-light mb-0">Nguyen Van A</label>|&nbsp;
-                <a href="#" class=" text-light"> Đăng xuất</a>
+                <label class="ml-auto mr-2  text-light mb-0">${giangvien.tenGiangVien}</label>|&nbsp;
+                <form action="logoutServlet" method="GET">
+                    <input type="submit" class="btn" value ="Đăng xuất"/>
+                </form>
             </div>
         </nav>
     </header>
@@ -50,7 +52,7 @@
                 </div>
             </c:if>
             <div class="col-9">
-                <div class="container p-2" style="height:100%; padding-top: 20px;margin-top: 20px; box-shadow: 0 0 1px 2px #a3a3c2; background:'white';border-radius: 5px;">
+                <div class="container p-2" style="height:100%;min-height: 22em; padding-top: 20px;margin-top: 20px; box-shadow: 0 0 1px 2px #a3a3c2; background:'white';border-radius: 5px;">
                     <div class='p-1'>
                         <a href="#" id="title-mh" class="form-control font-weight-bold ">LỚP HỌC</a>
                         <div id="_mh-content"  class="p-2 ">
@@ -134,13 +136,13 @@
                                                 <td><c:out value = "${danhSachSinhVien.getMssv()}"/></td>
                                                 <td>
                                                     <c:forEach items="${danhSachSinhVien.getChuanDauRA_KH()}"  var="danhSachChuanDauRa" >
-                                                        <c:out value = "${danhSachChuanDauRa.getChuanDaura()}"/> :<c:out value = "${danhSachChuanDauRa.getKetQua()}"/>  
+                                                        <c:out value = "${danhSachChuanDauRa.getChuanDaura()}"/> :<c:out  value = "${danhSachChuanDauRa.getKetQua()}"/>  
                                                     </c:forEach>
                                                 </td>
                                                 <td>
                                                     <form action="../LoginServlet" method="GET">
                                                         <input type="hidden" name="mssv" value="${danhSachSinhVien.getMssv()}" > 
-                                                        <input type="submit" value="Chi tiết" />
+                                                        <input class='btn btn-info' type="submit" value="Chi tiết" />
                                                     </form>
                                                 </td>
 
@@ -164,6 +166,15 @@
     </footer>
 
 </html>
+
+
+
+
+
+
+
+
+
 
 
 

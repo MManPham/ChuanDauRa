@@ -491,10 +491,9 @@
       </module>
     </application>
     <application context-root="/ChuanDauRa" object-type="user" name="ChuanDauRa" directory-deployed="true" location="file:/C:/Users/Man%20Pham/Documents/GitHub/ChuanDauRa/ChuanDauRa/build/web/">
-      <property name="archiveType" value="war"></property>
       <property name="appLocation" value="file:/C:/Users/Man%20Pham/Documents/GitHub/ChuanDauRa/ChuanDauRa/build/web/"></property>
+      <property name="archiveType" value="war"></property>
       <property name="defaultAppName" value="web"></property>
-      <property name="keepSessions" value="true"></property>
       <module name="ChuanDauRa">
         <engine sniffer="security"></engine>
         <engine sniffer="web"></engine>

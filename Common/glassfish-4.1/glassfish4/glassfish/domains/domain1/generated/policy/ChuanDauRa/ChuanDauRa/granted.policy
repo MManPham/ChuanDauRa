@@ -1,4 +1,4 @@
-/* AUTOMATICALLY GENERATED ON Sat Jun 08 18:47:50 ICT 2019*/
+/* AUTOMATICALLY GENERATED ON Sat Jun 08 19:39:35 ICT 2019*/
 /* DO NOT EDIT */
 
 grant {
@@ -9,6 +9,7 @@ grant {
 grant      principal * * {
   permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
   permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "logoutServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "AjaxTruongKhoa", "**";
   permission javax.security.jacc.WebRoleRefPermission "default", "**";
   permission javax.security.jacc.WebRoleRefPermission "LoginServlet", "**";

@@ -1,4 +1,4 @@
-package org.apache.jsp.WebProfile;
+package org.apache.jsp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -70,11 +70,11 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <head>\r\n");
       out.write("        <meta charset=\"utf-8\">\r\n");
       out.write("        <title>GiangVien</title>\r\n");
-      out.write("        <link href=\"../Assets/Css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
+      out.write("        <link href=\"Assets/Css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
-      out.write("        <script src=\"../Assets/JS/jquery-3.4.1.min.js\" type=\"text/javascript\"></script>\r\n");
+      out.write("        <script src=\"Assets/JS/jquery-3.4.1.min.js\" type=\"text/javascript\"></script>\r\n");
       out.write("\r\n");
-      out.write("        <script src=\"../Assets/JS/giangvien.js\" type=\"text/javascript\"></script>\r\n");
+      out.write("        <script src=\"Assets/JS/giangvien.js\" type=\"text/javascript\"></script>\r\n");
       out.write("\r\n");
       out.write("    </head>\r\n");
       out.write("    <header>\r\n");
@@ -85,8 +85,12 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <span class=\"navbar-toggler-icon\"></span>\r\n");
       out.write("                </button>\r\n");
       out.write("\r\n");
-      out.write("                <label class=\"ml-auto mr-2  text-light mb-0\">Nguyen Van A</label>|&nbsp;\r\n");
-      out.write("                <a href=\"#\" class=\" text-light\"> Đăng xuất</a>\r\n");
+      out.write("                <label class=\"ml-auto mr-2  text-light mb-0\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${giangvien.tenGiangVien}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</label>|&nbsp;\r\n");
+      out.write("                <form action=\"logoutServlet\" method=\"GET\">\r\n");
+      out.write("                    <input type=\"submit\" class=\"btn\" value =\"Đăng xuất\"/>\r\n");
+      out.write("                </form>\r\n");
       out.write("            </div>\r\n");
       out.write("        </nav>\r\n");
       out.write("    </header>\r\n");
@@ -97,7 +101,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
         return;
       out.write("\r\n");
       out.write("            <div class=\"col-9\">\r\n");
-      out.write("                <div class=\"container p-2\" style=\"height:100%; padding-top: 20px;margin-top: 20px; box-shadow: 0 0 1px 2px #a3a3c2; background:'white';border-radius: 5px;\">\r\n");
+      out.write("                <div class=\"container p-2\" style=\"height:100%;min-height: 22em; padding-top: 20px;margin-top: 20px; box-shadow: 0 0 1px 2px #a3a3c2; background:'white';border-radius: 5px;\">\r\n");
       out.write("                    <div class='p-1'>\r\n");
       out.write("                        <a href=\"#\" id=\"title-mh\" class=\"form-control font-weight-bold \">LỚP HỌC</a>\r\n");
       out.write("                        <div id=\"_mh-content\"  class=\"p-2 \">\r\n");
@@ -154,6 +158,15 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </footer>\r\n");
       out.write("\r\n");
       out.write("</html>\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
@@ -906,7 +919,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("                                                        <input type=\"hidden\" name=\"mssv\" value=\"");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getMssv()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("\" > \r\n");
-          out.write("                                                        <input type=\"submit\" value=\"Chi tiết\" />\r\n");
+          out.write("                                                        <input class='btn btn-info' type=\"submit\" value=\"Chi tiết\" />\r\n");
           out.write("                                                    </form>\r\n");
           out.write("                                                </td>\r\n");
           out.write("\r\n");
