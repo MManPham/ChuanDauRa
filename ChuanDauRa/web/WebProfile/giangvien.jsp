@@ -35,7 +35,7 @@
         <div class="row p-2 d-flex justify-content-center">
             <c:if test = "${isNQL}">
                 <div class="col-3">
-                    <div class="list-group" style="margin-top: 20px;">
+                    <div class="list-group list-gv" style="margin-top: 20px;">
                         <h4 class="list-group-item text-left">Danh sách giảng viên ${test} </h4>
                         <button type="button" id="${giangvien.getMaSoGiangVien()}" class="list-group-item list-group-item-action active gv">
                             Trưởng khoa.
@@ -50,10 +50,10 @@
                 </div>
             </c:if>
             <div class="col-9">
-                <div class="container p-2" style="padding-top: 20px;margin-top: 20px; box-shadow: 0 0 1px 2px #a3a3c2; background:'white';border-radius: 5px;">
+                <div class="container p-2" style="height:100%; padding-top: 20px;margin-top: 20px; box-shadow: 0 0 1px 2px #a3a3c2; background:'white';border-radius: 5px;">
                     <div class='p-1'>
                         <a href="#" id="title-mh" class="form-control font-weight-bold ">LỚP HỌC</a>
-                        <div id="mh-content"  class="p-2 ">
+                        <div id="_mh-content"  class="p-2 ">
                             <c:forEach items="${giangvien.getDanhSachLopMH()}"  var="ds_lop_mh" >
                                 <div class="row d-flex justify-content-between mb-3 mt-2">
                                     <select class="form-control col-3 ml-3">
@@ -105,30 +105,30 @@
                     </div>
                     <div class='p-1'>
                         <a href="#" id="title-cn" class="form-control title font-weight-bold pt-2">LỚP SINH HOẠT</a>
-                        <div class="table-responsive p-2 " id="sailorTableArea"> 
-                            <c:forEach items="${giangvien.getDanhSachLopCN()}"  var="ds_lop_sh" >
-                                <div class="row d-flex justify-content-between mb-3 mt-2">
-                                    <select class="form-control col-3 ml-3">
-                                        <c:forEach items="${giangvien.getDanhSachLopCN()}"  var="ds_lop_sh" >
-                                            <option valeu=' <c:out value = "${ds_lop_sh.getTen_Lop()}"/>' > <c:out value = "${ds_lop_sh.getTen_Lop()}"/></option>
-                                        </c:forEach>
-                                    </select>
-                                    <div class="input-group col-3">
-                                        <input type="text" class="form-control" placeholder="Tên Lớp Học" aria-label="tên lớp học" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button">Tìm</button>
-                                        </div>
+                        <div class="table-responsive p-2 " id="_cn-content"> 
+                            <div class="row d-flex justify-content-between mb-3 mt-2">
+                                <select id="ds_ten_lcn" class="form-control col-3 ml-3 ">
+                                    <c:forEach items="${giangvien.getDanhSachLopCN()}"  var="ds_lop_sh" >
+                                        <option valeu=' <c:out value = "${ds_lop_sh.getTen_Lop()}"/>' > <c:out value = "${ds_lop_sh.getTen_Lop()}"/></option>
+                                    </c:forEach>
+                                </select>
+                                <div class="input-group col-3">
+                                    <input type="text" class="form-control" placeholder="Tên Lớp Học" aria-label="tên lớp học" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">Tìm</button>
                                     </div>
                                 </div>
-                                <table id="sailorTable" class="table table-striped table-bordered" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã số sinh viên</th> 
-                                            <th>LO[i] đạt được</th>
-                                            <th>Chi tiết</th>   
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            </div>
+                            <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Mã số sinh viên</th> 
+                                        <th>LO[i] đạt được</th>
+                                        <th>Chi tiết</th>   
+                                    </tr>
+                                </thead>
+                                <tbody id="ds_sv_cn">
+                                    <c:forEach items="${giangvien.getDanhSachLopCN()}"  var="ds_lop_sh" >
                                         <c:forEach items="${ds_lop_sh.getDs_SV()}"  var="danhSachSinhVien" >
                                             <tr>
                                                 <td><c:out value = "${danhSachSinhVien.getMssv()}"/></td>
@@ -146,10 +146,9 @@
 
                                             </tr>
                                         </c:forEach>
-                                    </tbody>
-                                </table>
-
-                            </c:forEach>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -165,6 +164,18 @@
     </footer>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

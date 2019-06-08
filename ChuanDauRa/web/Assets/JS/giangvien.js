@@ -1,55 +1,262 @@
 $(document).ready(() => {
-    $('#mh-content').toggle();
-    $('#cn-content').toggle();
-    let data = '';
-    let redCDR = (ds_cdr) => {
-        let cdr = '';
-        ds_cdr.forEach((item, index) => {
-            cdr += item.chuanDauRaMonHoc + " " + item.ketQua + "% ";
-        })
-        return cdr;
-    }
-    let add_lop_mh = (ds_lopmh) => {
-        ds_lopmh.forEach((element, index) => {
-            console.log(element);
-            $('#ds_sv_lmh').append(
-                    "<tr>\n\
-                                <td><b>" + (index + 1) + "</b></td>\n\
-                                   <td>" + element.tenSV + "</td>\n\
-                                <td>" + element.diemqt + "</td>\n\
-                                <td>" + element.diemgk + "</td>\n\
-                                <td>" + element.diemth + "</td>\n\
-                                <td>" + element.diemck + "</td>\n\
-                                <td>" + ((element.diemqt + element.diemgk + element.diemth + element.diemck) / 4) + "</td>\n\
-                                <td>" + redCDR(element.listCDR_MH) + "</td>\n\
-                            </tr>"
-                    )
-        });
-    }
-    $('.gv').click((event) => {
-        let id = event.target.id;
-        $.ajax({
-            type: 'POST',
-            data: {id: id},
-            url: 'http://localhost:8080/ChuanDauRa/AjaxTruongKhoa',
-            success: (result) => {
-                data = JSON.parse(result);
-                if (data.danhSachLopCN)
-                {
-                    $('#ds_sv_lmh').empty();
-                    add_lop_mh(data.danhSachLopMH[0].ds_SV)
-                }
-            }
-        })
-    })
-    $('#title-mh').click(() => {
-        $('#mh-content').toggle();
-    })
-    $('#title-cn').click(() => {
-        $('#sailorTableArea').toggle();
-    })
+    let mydata = '';
 
+
+    myWeb = {
+        Views: {
+            displayLopMH: (index, sinhvien) => {
+                return "<tr>\n\
+                                <td><b>" + (index + 1) + "</b></td>\n\
+                                   <td>" + sinhvien.tenSV + "</td>\n\
+                                <td>" + sinhvien.diemqt + "</td>\n\
+                                <td>" + sinhvien.diemgk + "</td>\n\
+                                <td>" + sinhvien.diemth + "</td>\n\
+                                <td>" + sinhvien.diemck + "</td>\n\
+                                <td>" + ((sinhvien.diemqt + sinhvien.diemgk + sinhvien.diemth + sinhvien.diemck) / 4) + "</td>\n\
+                                <td>" + myWeb.Modals.readCDR_MH(sinhvien.listCDR_MH) + "</td>\n\
+                            </tr>"
+            },
+            displayLopCN: (sinhvien) => {
+                StringReturn = "<tr><td>" + sinhvien.mssv + "</td> <td>" + myWeb.Modals.readCDR_KH(sinhvien.chuanDauRA_KH) + "</td>\n\
+                                                 <td> <form action= '../LoginServlet' method='GET'>\n\
+                                                    <input type='hidden' name='mssv' value='" + sinhvien.mssv + "' />\n\
+                                                    <input class='btn btn-info' type='submit' value='Chi tiết' /></form></td>\n\
+                                                </tr>"
+                return StringReturn;
+            }
+        },
+        Modals: {
+            toggleLopMH: true,
+            toggleLopCN: true,
+            data: '',
+            readCDR_MH: (ds_cdr) => {
+                let cdr = '';
+                ds_cdr.forEach((item, index) => {
+                    cdr += item.chuanDauRaMonHoc + " " + item.ketQua + "% ";
+                })
+                return cdr;
+            },
+            readCDR_KH: (ds_cdr) => {
+                let cdr = '';
+                ds_cdr.forEach((item, index) => {
+                    cdr += item.chuanDaura + " " + item.ketQua + "% ";
+                })
+                return cdr;
+            },
+            add_lop_mh: (ds_lopmh) => {
+                ds_lopmh.forEach((element, index) => {
+                    $('#ds_sv_lmh').append(myWeb.Views.displayLopMH(index, element))
+                });
+            },
+            add_lop_cn: (ds_lopcn) => {
+                $('#ds_ten_lcn').empty();
+                ds_lopcn.forEach((lop_cn) => {
+                    $('#ds_ten_lcn').append("<option>" + lop_cn.ten_Lop + "</option>")
+                    lop_cn.ds_SV.forEach((sinhvien) => {
+                        console.log(1111, sinhvien);
+                        $('#ds_sv_cn').append(myWeb.Views.displayLopCN(sinhvien));
+                    });
+                })
+            }
+
+
+        },
+        Controller: {
+            get_append_data: () => {
+                $('.gv').on('click', (event) => {
+                    let id = event.target.id;
+                    $.ajax({
+                        type: 'POST',
+                        data: {id: id},
+                        url: 'http://localhost:8080/ChuanDauRa/AjaxTruongKhoa',
+                        success: (result) => {
+                            mydata = JSON.parse(result);
+                            let data = mydata;
+                            console.log(data);
+                            if (data.danhSachLopMH) {
+                                $('#ds_sv_lmh').empty();
+                                myWeb.Modals.add_lop_mh(data.danhSachLopMH[0].ds_SV)
+                            }
+                            if (data.danhSachLopCN)
+                            {
+                                $('#ds_sv_cn').empty();
+                                myWeb.Modals.add_lop_cn(data.danhSachLopCN)
+                            }
+
+                        }
+                    })
+                })
+            },
+            toggleLopMH: () => {
+                $('#title-mh').click(() => {
+                    if (myWeb.Modals.toggleLopMH === true)
+                        $('div#_mh-content').show();
+                    else
+                        $('div#_mh-content').hide()
+                    myWeb.Modals.toggleLopMH = !myWeb.Modals.toggleLopMH;
+                });
+
+            },
+            toggleLopCN: () => {
+                $('#title-cn').click(() => {
+                    if (myWeb.Modals.toggleLopCN === true)
+                        $('div#_cn-content').show();
+                    else
+                        $('div#_cn-content').hide();
+                    myWeb.Modals.toggleLopCN = !myWeb.Modals.toggleLopCN;
+
+                })
+            }
+        }
+
+    }
+
+    main = () => {
+        $('div#_mh-content').hide();
+        $('div#_cn-content').hide();
+        myWeb.Controller.get_append_data();
+        myWeb.Controller.toggleLopCN();
+        myWeb.Controller.toggleLopMH();
+
+
+
+    }
+    window.onload = main();
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
