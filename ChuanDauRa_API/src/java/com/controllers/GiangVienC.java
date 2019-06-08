@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.controllers;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -20,6 +21,7 @@ import com.models.Sinhvien;
 import com.models.SinhvienMonhoc;
 import java.util.List;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -27,6 +29,7 @@ import javax.ws.rs.PathParam;
  */
 @Path("giangvien")
 public class GiangVienC {
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<GiangVien> getAllSV() throws ClassNotFoundException, SQLException {
@@ -69,27 +72,25 @@ public class GiangVienC {
         ResultSet rs = null;
         List<Lop_MH> danhSachLopMonHoc = new ArrayList<>();
         List<Lop_CN> danhSachLopChuNhiem = new ArrayList<>();
-        
         String tenGV = null;
         String maGV = null;
         try {
             con = ConnectDB.makeConnect();
-                rs = con.prepareStatement("SELECT GIANGVIEN.MSGV, GIANGVIEN.TENGV, LOPMONHOC.TENLOPMH,LOPMONHOC.MALOPMH  \n"
-                        + "FROM LOPMONHOC, GIANGVIEN \n"
-                        + "WHERE LOPMONHOC.MSGV = '" + id + "' AND LOPMONHOC.MSGV = GIANGVIEN.MSGV").executeQuery();
-                while (rs.next()) {
-                    maGV = rs.getString("MSGV");
-                    tenGV = rs.getString("TENGV");
-                    danhSachLopMonHoc.add(new Lop_MH(rs.getString("TENLOPMH"),rs.getString("MALOPMH"), this.getSVs_inClassMH(rs.getString("MALOPMH"))));
-                }
-                
-                
-                rs = con.prepareStatement("SELECT * FROM LOPSINHHOAT WHERE MACOVAN = '"+id+"'").executeQuery();
-                while(rs.next()){
-                    String maLopSH = rs.getString("MALOPSH");
-                    danhSachLopChuNhiem.add(new Lop_CN(maLopSH, getSVs_inClassCN(maLopSH)));
-                }
-            newGv = new GiangVien(maGV, tenGV, danhSachLopMonHoc.isEmpty()?null:danhSachLopMonHoc,danhSachLopChuNhiem);
+            rs = con.prepareStatement("SELECT GIANGVIEN.MSGV, GIANGVIEN.TENGV, LOPMONHOC.TENLOPMH,LOPMONHOC.MALOPMH  \n"
+                    + "FROM LOPMONHOC, GIANGVIEN \n"
+                    + "WHERE LOPMONHOC.MSGV = '" + id + "' AND LOPMONHOC.MSGV = GIANGVIEN.MSGV").executeQuery();
+            while (rs.next()) {
+                maGV = rs.getString("MSGV");
+                tenGV = rs.getString("TENGV");
+                danhSachLopMonHoc.add(new Lop_MH(rs.getString("TENLOPMH"), rs.getString("MALOPMH"), this.getSVs_inClassMH(rs.getString("MALOPMH"))));
+            }
+
+            rs = con.prepareStatement("SELECT * FROM LOPSINHHOAT WHERE MACOVAN = '" + id + "'").executeQuery();
+            while (rs.next()) {
+                String maLopSH = rs.getString("MALOPSH");
+                danhSachLopChuNhiem.add(new Lop_CN(maLopSH, getSVs_inClassCN(maLopSH)));
+            }
+            newGv = new GiangVien(maGV, tenGV, danhSachLopMonHoc.isEmpty() ? null : danhSachLopMonHoc, danhSachLopChuNhiem);
             return newGv;
         } catch (SQLException e) {
             System.out.println("Error: " + e);
@@ -100,6 +101,83 @@ public class GiangVienC {
                 con.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
+            }
+        }
+    }
+    
+    @GET
+    @Path("get_lopCN/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Lop_CN> findLopCN(@PathParam("id") String id) throws ClassNotFoundException {
+        GiangVien newGv = null;
+        Connection con = null;
+        ResultSet rs = null;
+        List<Lop_CN> danhSachLopChuNhiem = new ArrayList<>();
+        String tenGV = null;
+        String maGV = null;
+        try {
+            con = ConnectDB.makeConnect();
+            
+            rs = con.prepareStatement("SELECT * FROM LOPSINHHOAT WHERE MACOVAN = '" + id + "'").executeQuery();
+            while (rs.next()) {
+                String maLopSH = rs.getString("MALOPSH");
+                danhSachLopChuNhiem.add(new Lop_CN(maLopSH, getSVs_inClassCN(maLopSH)));
+            }
+            return danhSachLopChuNhiem;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public Boolean check_lop_mh(String id) throws ClassNotFoundException {
+        Connection con = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM LOPMONHOC WHERE MSGV ='" + id + "'";
+        try {
+            con = ConnectDB.makeConnect();
+            rs = con.prepareStatement("SELECT * FROM LOPMONHOC WHERE MSGV = '" + id + "'").executeQuery();
+            if (!rs.next()) {
+                return false;
+            }
+            return true;
+        } catch (SQLException se) {
+            System.out.println("Error al ejecutar SQL" + se.getMessage());
+            throw new IllegalArgumentException("Error al ejecutar SQL: " + se.getMessage());
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+            }
+        }
+    }
+        public Boolean check_lop_cn(String id) throws ClassNotFoundException {
+        Connection con = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM LOPMONHOC WHERE MSGV ='" + id + "'";
+        try {
+            con = ConnectDB.makeConnect();
+            rs = con.prepareStatement("SELECT * FROM LOPMONHOC WHERE MSGV = '" + id + "'").executeQuery();
+            if (!rs.next()) {
+                return false;
+            }
+            return true;
+        } catch (SQLException se) {
+            System.out.println("Error al ejecutar SQL" + se.getMessage());
+            throw new IllegalArgumentException("Error al ejecutar SQL: " + se.getMessage());
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
             }
         }
     }
@@ -150,7 +228,7 @@ public class GiangVienC {
 
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT * FROM SINHVIEN WHERE MALOPSH = '"+ maLop +"'").executeQuery();
+            rs = con.prepareStatement("SELECT * FROM SINHVIEN WHERE MALOPSH = '" + maLop + "'").executeQuery();
             while (rs.next()) {
                 Sinhvien newSvSh = new Sinhvien(
                         rs.getString("MSSV"),
@@ -160,7 +238,7 @@ public class GiangVienC {
                         rs.getString("PASSW"),
                         rs.getString("MACHUYENNGANH"),
                         sv_C.get_CDR_KH(rs.getString("MACHUYENNGANH"), sv_C.getListCDR_MH(rs.getString("MSSV"))),
-                        sv_C.getListCDR_LopMH(rs.getString("MSSV"))
+                        null
                 );
                 listSv.add(newSvSh);
             }
@@ -178,9 +256,6 @@ public class GiangVienC {
         }
     }
 }
-
-
-
 
 
 
