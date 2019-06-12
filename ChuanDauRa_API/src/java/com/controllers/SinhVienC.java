@@ -22,7 +22,6 @@ import com.models.CDR_MH;
 import com.models.ListCDR_MH;
 import java.util.List;
 import javax.ws.rs.PathParam;
-
 /**
  *
  * @author Man Pham
@@ -30,14 +29,11 @@ import javax.ws.rs.PathParam;
 @Path("sinhvien")
 public class SinhVienC {
 
-    public SinhVienC() {
-    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Sinhvien> getAllSV() throws ClassNotFoundException, SQLException {
         ArrayList<Sinhvien> listSv = new ArrayList<>();
-
+        
         Connection con = null;
         ResultSet rs = null;
         try {
@@ -52,11 +48,12 @@ public class SinhVienC {
                         rs.getString("PASSW"),
                         rs.getString("MACHUYENNGANH")
                 );
-                listSv.add(newSv);
-
+                    listSv.add(newSv);
+                
             }
             return listSv;
 
+         
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return null;
@@ -70,7 +67,7 @@ public class SinhVienC {
         }
 
     }
-
+ 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -90,7 +87,8 @@ public class SinhVienC {
                         rs.getString("PASSW"),
                         rs.getString("MACHUYENNGANH"),
                         get_CDR_KH(rs.getString("MACHUYENNGANH"), getListCDR_MH(rs.getString("MSSV"))),
-                        getListCDR_MH(rs.getString("MSSV"))
+                        getListCDR_LopMH(rs.getString("MSSV"))
+                        
                 );
             }
             return newSv;
@@ -107,20 +105,21 @@ public class SinhVienC {
         }
     }
 
-    public List<CDR_KH_KQ> get_CDR_KH(String maCN, ArrayList<ListCDR_MH> danhSachMonHoc) throws ClassNotFoundException {
 
+    public List<CDR_KH_KQ> get_CDR_KH(String maCN,ArrayList<ListCDR_MH> danhSachMonHoc ) throws ClassNotFoundException {
+     
         Connection con = null;
         ResultSet rs = null;
         List<CDR_KH_KQ> list_cdr = new ArrayList<>();
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT * FROM CDR_CN WHERE MACHUYENNGANH ='" + maCN + "'").executeQuery();
+            rs = con.prepareStatement("SELECT * FROM CDR_CN WHERE MACHUYENNGANH ='"+maCN+"'").executeQuery();
             while (rs.next()) {
-
+                
                 list_cdr.add(new CDR_KH_KQ(rs.getString("CDRKH"), getValueOfCDRKhoaHoc(rs.getString("CDRKH"), danhSachMonHoc)));
-
+                
             }
-            return list_cdr;
+            return  list_cdr;
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return null;
@@ -133,24 +132,23 @@ public class SinhVienC {
             }
         }
     }
-
-    public ArrayList<ListCDR_MH> getListCDR_MH(String mssv) throws ClassNotFoundException {
-
+    
+    public ArrayList<ListCDR_MH> getListCDR_MH(String mssv) throws ClassNotFoundException{
+       
         Connection con = null;
         ResultSet rs = null;
         ArrayList<ListCDR_MH> DanhSachMonHoc = new ArrayList<>();
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT DISTINCT KETQUATHI.MAMH, LOPMONHOC.MALOPMH \n"
-                    + "FROM KETQUATHI, LOPMONHOC \n"
-                    + "WHERE KETQUATHI.MAMH =  LOPMONHOC.MAMON AND MSSV = '" + mssv + "'").executeQuery();
+            rs = con.prepareStatement("SELECT DISTINCT MAMH FROM KETQUATHI WHERE MSSV = '" + mssv + "'").executeQuery();
             while (rs.next()) {
-                List<CDR_MH> list_cdrmh = new ArrayList<>(getCDR_MH(mssv, rs.getString("MAMH")));
-                ListCDR_MH temp = new ListCDR_MH(rs.getString("MALOPMH"), list_cdrmh);
+                List<CDR_MH> list_cdrmh = new ArrayList<>(getCDR_MH(mssv,rs.getString("MAMH")));
+                ListCDR_MH temp = new ListCDR_MH(rs.getString("MAMH"),list_cdrmh);
                 DanhSachMonHoc.add(temp);
-
+            
+               
             }
-
+            
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return null;
@@ -160,26 +158,60 @@ public class SinhVienC {
                 con.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
-
+                
             }
         }
-
+        
         return DanhSachMonHoc;
     }
-
-    public List<CDR_MH> getCDR_MH(String mssv, String maMon) throws ClassNotFoundException {
-
+    
+        public ArrayList<ListCDR_MH> getListCDR_LopMH(String mssv) throws ClassNotFoundException{
+       
         Connection con = null;
         ResultSet rs = null;
-
+        ArrayList<ListCDR_MH> DanhSachMonHoc = new ArrayList<>();
+        try {
+            con = ConnectDB.makeConnect();
+            rs = con.prepareStatement("SELECT DISTINCT KETQUATHI.MAMH, LOPMONHOC.MALOPMH \n" +
+                                        "FROM KETQUATHI, LOPMONHOC \n" +
+                                        "WHERE KETQUATHI.MAMH =  LOPMONHOC.MAMON AND MSSV = '" + mssv + "'").executeQuery();
+            while (rs.next()) {
+                List<CDR_MH> list_cdrmh = new ArrayList<>(getCDR_MH(mssv,rs.getString("MAMH")));
+                ListCDR_MH temp = new ListCDR_MH(rs.getString("MALOPMH"),list_cdrmh);
+                DanhSachMonHoc.add(temp);
+            
+               
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                
+            }
+        }
+        
+        return DanhSachMonHoc;
+    } 
+        
+    public List<CDR_MH> getCDR_MH(String mssv, String maMon) throws ClassNotFoundException{
+      
+        Connection con = null;
+        ResultSet rs = null;
+        
         List<CDR_MH> list_cdrmh = new ArrayList<>();
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT DISTINCT CDRMH FROM CDR_MH WHERE MAMH = '" + maMon + "'").executeQuery();
-            while (rs.next()) {
-                list_cdrmh.add(new CDR_MH(rs.getString(1), getValueOfCDRMH(mssv, maMon, rs.getString(1))));
+            rs = con.prepareStatement("SELECT DISTINCT CDRMH FROM CDR_MH WHERE MAMH = '"+maMon+"'").executeQuery();
+            while (rs.next()) {                
+                list_cdrmh.add(new CDR_MH(rs.getString(1), getValueOfCDRMH(mssv,maMon, rs.getString(1))));
             }
-
+            
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return null;
@@ -191,35 +223,34 @@ public class SinhVienC {
                 ex.printStackTrace();
             }
         }
-
+        
         return list_cdrmh;
     }
-
-    public float getValueOfCDRMH(String mssv, String maMon, String CDRMH) throws ClassNotFoundException {
-
+    
+    public float getValueOfCDRMH(String mssv, String maMon, String CDRMH) throws ClassNotFoundException{
+        
         Connection con = null;
-        ResultSet rs = null;
+        ResultSet rs = null;        
         float result = 0;
-        int count = 0;
+        int  count = 0;
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT KQT.CAU, KQT.DIEM, CTDT.DIEMTOIDA, DT.LOAI, CTDT.CDR "
-                    + "FROM KETQUATHI KQT, DETHI DT, CAUTRUCDT CTDT "
-                    + "WHERE KQT.MADT = DT.MADT AND DT.MADT =  CTDT.MADT AND CTDT.CAU = KQT.CAU "
-                    + "AND KQT.MSSV = '" + mssv + "' AND DT.MAMH ='" + maMon + "' AND CTDT.CDR = '" + CDRMH + "'")
-                    .executeQuery();
+            rs = con.prepareStatement("SELECT KQT.CAU, KQT.DIEM, CTDT.DIEMTOIDA, DT.LOAI, CTDT.CDR " +
+                                        "FROM KETQUATHI KQT, DETHI DT, CAUTRUCDT CTDT " +
+                                        "WHERE KQT.MADT = DT.MADT AND DT.MADT =  CTDT.MADT AND CTDT.CAU = KQT.CAU "
+                                        + "AND KQT.MSSV = '"+mssv+"' AND DT.MAMH ='"+maMon+"' AND CTDT.CDR = '"+CDRMH+"'")
+                                        .executeQuery();
             while (rs.next()) {
-
-                int tempCount = getNumberOfCDRMH(maMon, rs.getString("LOAI"), CDRMH);
-                result += (float) (rs.getInt("DIEM") * 100 / rs.getInt("DIEMTOIDA")) / tempCount;
-                count++;
+                
+                
+                int tempCount = getNumberOfCDRMH(maMon, rs.getString("LOAI"),CDRMH);
+                result += (float)(rs.getInt("DIEM")*100/rs.getInt("DIEMTOIDA"))/tempCount;
+                count ++;
             }
-            if (count == 0) {
-                return 0;
-            }
+            if(count == 0) return 0;            
             result /= count;
             return result;
-
+            
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return 0;
@@ -229,27 +260,28 @@ public class SinhVienC {
                 con.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
-
+                
             }
         }
 
+      
     }
-
-    public int getNumberOfCDRMH(String maMon, String loai, String CDRMH) throws ClassNotFoundException {
+            
+    public int getNumberOfCDRMH(String maMon, String loai, String CDRMH) throws ClassNotFoundException{
         Connection con = null;
         ResultSet rs = null;
         int result = 1;
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT  COUNT(*) "
-                    + "FROM CAUTRUCDT CTDT, DETHI DT "
-                    + "WHERE CTDT.MADT = DT.MADT AND DT.LOAI = '" + loai + "' AND DT.MAMH = '" + maMon + "' AND CDR = '" + CDRMH + "'")
-                    .executeQuery();
+            rs =  con.prepareStatement("SELECT  COUNT(*) " +
+                                        "FROM CAUTRUCDT CTDT, DETHI DT " +
+                                        "WHERE CTDT.MADT = DT.MADT AND DT.LOAI = '"+ loai +"' AND DT.MAMH = '"+maMon+"' AND CDR = '"+CDRMH+"'")                                     
+                                        .executeQuery();
             rs.next();
             result = rs.getInt(1);
-
+            
             return result;
-
+            
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return result;
@@ -259,40 +291,41 @@ public class SinhVienC {
                 con.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
-
+                
             }
         }
     }
-
-    public float getValueOfCDRKhoaHoc(String CDR_KH, ArrayList<ListCDR_MH> danhSachMonHoc) throws ClassNotFoundException {
+    
+    
+    
+    public float getValueOfCDRKhoaHoc(String CDR_KH, ArrayList<ListCDR_MH> danhSachMonHoc) throws ClassNotFoundException{
         float result = 0;
         Connection con = null;
         ResultSet rs = null;
-        int count = 0;
+        int count  = 0;
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT * FROM CDR_MH WHERE CDRKH = '" + CDR_KH + "'")
-                    .executeQuery();
-            while (rs.next()) {
-                for (ListCDR_MH x : danhSachMonHoc) {
-                    if (x.getMaMon().equals(rs.getString("MAMH"))) {
+            rs =  con.prepareStatement("SELECT * FROM CDR_MH WHERE CDRKH = '"+ CDR_KH +"'")                                     
+                                        .executeQuery();
+            while( rs.next()){
+                for(ListCDR_MH x : danhSachMonHoc){
+                    if(x.getMaMon().equals(rs.getString("MAMH")))
+                    {
                         int numberCDRMHofKH = countCDRKHofMonHoc(x.getMaMon(), CDR_KH);
-                        for (CDR_MH y : x.getDanhSach_CDR_CN()) {
-                            if (y.getChuanDauRaMonHoc().equals(rs.getString("CDRMH"))) {
-                                result += y.getKetQua() / numberCDRMHofKH;
-
-                            }
+                        for(CDR_MH y : x.getDanhSach_CDR_CN() ){
+                            if(y.getChuanDauRaMonHoc().equals(rs.getString("CDRMH"))){
+                                result += y.getKetQua()/numberCDRMHofKH;
+                                
+                            }                                    
                         }
-                        count++;
-
+                        count ++;
+                        
                     }
                 }
             }
-            if (count == 0) {
-                return 0;
-            }
-            return result / (float) count;
-
+        if (count == 0) return 0;
+        return result/(float)count;
+            
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return result;
@@ -302,29 +335,28 @@ public class SinhVienC {
                 con.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
-
+                
             }
-        }
-    }
-
-    public int countCDRKHofMonHoc(String maMon, String CDRKH) throws ClassNotFoundException {
+        }                                    
+    }    
+    public int countCDRKHofMonHoc(String maMon, String CDRKH) throws ClassNotFoundException{
         int result = 0;
         Connection con = null;
         ResultSet rs = null;
-
+        
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT  COUNT(*) AS TOTAL "
-                    + "FROM CDR_MH "
-                    + "WHERE CDR_MH.MAMH = '" + maMon + "' AND CDRKH = '" + CDRKH + "' "
-                    + "GROUP BY CDRKH")
-                    .executeQuery();
-            while (rs.next()) {
-                result = rs.getInt("TOTAL");
+            rs =  con.prepareStatement("SELECT  COUNT(*) AS TOTAL " +
+                                        "FROM CDR_MH " +
+                                        "WHERE CDR_MH.MAMH = '"+ maMon+"' AND CDRKH = '"+ CDRKH +"' " +
+                                        "GROUP BY CDRKH")                                     
+                                        .executeQuery();
+            while( rs.next()){
+               result = rs.getInt("TOTAL");
             }
-
+            
             return result;
-
+            
         } catch (SQLException e) {
             System.out.println("Error: " + e);
             return result;
@@ -334,13 +366,11 @@ public class SinhVienC {
                 con.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
-
+                
             }
-        }
+        }  
     }
-
+            
+    
 }
-
-
-
 

@@ -22,6 +22,7 @@ import com.models.CDR_MH;
 import com.models.ListCDR_MH;
 import com.models.Lop_CN;
 import com.models.Lop_MH;
+import com.models.Sinhvien;
 import com.models.SinhvienMonhoc;
 import java.util.List;
 import javax.ws.rs.PathParam;
@@ -70,13 +71,13 @@ public class GiangVienC {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public GiangVien findSV(@PathParam("id") String id) throws ClassNotFoundException {
+    public GiangVien findGV(@PathParam("id") String id) throws ClassNotFoundException {
         GiangVien newGv = null;
         Connection con = null;
         ResultSet rs = null;
         List<Lop_MH> danhSachLopMonHoc = new ArrayList<>();
         List<Lop_CN> danhSachLopChuNhiem = new ArrayList<>();
-
+        
         String tenGV = null;
         String maGV = null;
         try {
@@ -89,8 +90,14 @@ public class GiangVienC {
                     tenGV = rs.getString("TENGV");
                     danhSachLopMonHoc.add(new Lop_MH(rs.getString("TENLOPMH"),rs.getString("MALOPMH"), this.getSVs_inClassMH(rs.getString("MALOPMH"))));
                 }
-
-            newGv = new GiangVien(maGV, tenGV, danhSachLopMonHoc.isEmpty()?null:danhSachLopMonHoc,null);
+                
+                
+                rs = con.prepareStatement("SELECT * FROM LOPSINHHOAT WHERE MACOVAN = '"+id+"'").executeQuery();
+                while(rs.next()){
+                    String maLopSH = rs.getString("MALOPSH");
+                    danhSachLopChuNhiem.add(new Lop_CN(maLopSH, getSVs_inClassCN(maLopSH)));
+                }
+            newGv = new GiangVien(maGV, tenGV, danhSachLopMonHoc.isEmpty()?null:danhSachLopMonHoc,danhSachLopChuNhiem);
             return newGv;
         } catch (SQLException e) {
             System.out.println("Error: " + e);
@@ -144,29 +151,27 @@ public class GiangVienC {
 
     }
 
-    public List<SinhvienMonhoc> getSVs_inClassCN(String maLop) throws ClassNotFoundException, SQLException {
-        List<SinhvienMonhoc> listSv = new ArrayList<>();
+    public List<Sinhvien> getSVs_inClassCN(String maLop) throws ClassNotFoundException, SQLException {
+        List<Sinhvien> listSv = new ArrayList<>();
         Connection con = null;
         ResultSet rs = null;
         SinhVienC sv_C = new SinhVienC();
 
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT SVMH.MSSV,TENSV,MONHOC.MAMH,LOPMONHOC.TENLOPMH,LOPMONHOC.MALOPMH,SVMH.DIEMQT,SVMH.DIEMGK,SVMH.DIEMTH,SVMH.DIEMCK,MONHOC.TINCHI\n"
-                    + "FROM SINHVIEN_MONHOC SVMH, MONHOC,LOPMONHOC , SINHVIEN\n"
-                    + "WHERE SVMH.MALOPMH= LOPMONHOC.MALOPMH AND LOPMONHOC.MAMON = MONHOC.MAMH\n"
-                    + "	AND LOPMONHOC.MALOPMH = '" + maLop + "' AND SINHVIEN.MSSV = SVMH.MSSV").executeQuery();
+            rs = con.prepareStatement("SELECT * FROM SINHVIEN WHERE MALOPSH = '"+ maLop +"'").executeQuery();
             while (rs.next()) {
-                SinhvienMonhoc newSvMh = new SinhvienMonhoc(
+                Sinhvien newSvSh = new Sinhvien(
                         rs.getString("MSSV"),
                         rs.getString("TENSV"),
-                        rs.getDouble("DIEMQT"),
-                        rs.getDouble("DIEMGK"),
-                        rs.getDouble("DIEMTH"),
-                        rs.getDouble("DIEMCK"),
-                        sv_C.getCDR_MH(rs.getString("MSSV"), rs.getString("MAMH"))
+                        rs.getString("SODT"),
+                        rs.getString("NIENKHOA"),
+                        rs.getString("PASSW"),
+                        rs.getString("MACHUYENNGANH"),
+                        sv_C.get_CDR_KH(rs.getString("MACHUYENNGANH"), sv_C.getListCDR_MH(rs.getString("MSSV"))),
+                        sv_C.getListCDR_LopMH(rs.getString("MSSV"))
                 );
-                listSv.add(newSvMh);
+                listSv.add(newSvSh);
             }
             return listSv;
         } catch (Exception e) {
