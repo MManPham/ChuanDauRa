@@ -57,12 +57,16 @@ public class HttpLogin {
     public void setJsonInput(String jsonInput) {
         this.jsonInput = jsonInput;
     }
+    
 
     public HttpLogin() {
     }
 
     public HttpLogin(String id, String passW) {
         this.jsonInput = "{\"id\":\"" + id + "\",\"password\":\"" + passW + "\" }";
+    }
+    public HttpLogin(String id) {
+        this.jsonInput = "{\"id\":\"" + id + "\" }";
     }
 
     public Boolean httpPostAccout(String url) throws MalformedURLException, UnsupportedEncodingException, IOException {

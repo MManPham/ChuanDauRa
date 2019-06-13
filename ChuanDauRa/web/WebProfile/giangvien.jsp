@@ -58,7 +58,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th >Tên sinh viên</th>
+                                <th >Mã số sinh viên</th>
                                 <th  class="text-center" >Quá trình</th>
                                 <th class="text-center">Giữa kỳ</th>
                                 <th class="text-center">Thực hành</th>
@@ -71,7 +71,7 @@
                             <c:forEach varStatus="loop" items="${ds_lop_mh.getDs_SV()}"  var="lop_mh" >
                                 <tr>
                                     <td><b>${loop.index +1}<b></td>
-                                    <td ><c:out value = "${lop_mh.getTensv()}"/></td>
+                                    <td ><c:out value = "${lop_mh.getMssv()}"/></td>
                                     <td class="text-center"><c:out value = "${lop_mh.getDiemqt()}"/></td>
                                     <td class="text-center"><c:out value = "${lop_mh.getDiemgk()}"/></td>
                                     <td class="text-center"><c:out value = "${lop_mh.getDiemth()}"/></td>
@@ -107,31 +107,42 @@
             <button class="btn-info" style="border-radius: 5px;">Xem</button><br><br>
 
             <div class="table-responsive" id="sailorTableArea"> 
+                <c:forEach items="${giangvien.getDanhSachLopCN()}"  var="ds_lop_sh" >
+                    <h4> <c:out value = "${ds_lop_sh.getTen_Lop()}"/></h4>
+                    
                 <table id="sailorTable" class="table table-striped table-bordered" width="100%">
 
                     <thead>
                         <tr>
-                            <th>Tên sinh viên</th> 
+                            <th>Mã số sinh viên</th> 
                             <th>LO[i] đạt được</th>
                             <th>Chi tiết</th>   
                         </tr>
                     </thead>
                     <tbody>
+                        <c:forEach items="${ds_lop_sh.getDs_SV()}"  var="danhSachSinhVien" >
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><c:out value = "${danhSachSinhVien.getMssv()}"/></td>
+                            <td>
+                                <c:forEach items="${danhSachSinhVien.getChuanDauRA_KH()}"  var="danhSachChuanDauRa" >
+                                    <c:out value = "${danhSachChuanDauRa.getChuanDaura()}"/> :<c:out value = "${danhSachChuanDauRa.getKetQua()}"/>  
+                                 </c:forEach>
+                            </td>
+                            <td>
+                                <form action="../LoginServlet" method="GET">
+                                    <input type="hidden" name="mssv" value="${danhSachSinhVien.getMssv()}" > 
+                                    <input type="submit" value="Chi tiết" />
+                                </form>
+                            </td>
 
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        </c:forEach>
 
-                        </tr> 
-
+                        
                     </tbody>
                 </table>
+               
+                </c:forEach>
             </div>
 
         </div>

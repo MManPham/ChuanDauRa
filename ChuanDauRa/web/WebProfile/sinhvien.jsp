@@ -112,7 +112,10 @@
                                             <c:forEach items="${kq_mh.getListCDR_MH()}"  var="cdr_mh" >
                                                 <tr>
                                                     <td><c:out value = "${cdr_mh.getChuanDauRaMonHoc()}"/>  <c:out value = "${cdr_mh.getKetQua()}"/>%</td>
-                                                    <td></td>
+                                                    <td><c:forEach items = "${cdr_mh.getChuanDauRaKhoaHoc()}" var = "cdr_cn"> 
+                                                            <c:out value = "${cdr_cn.getChuanDaura()}"/>: <c:out value = "${cdr_cn.getKetQua()}"/> 
+                                                        </c:forEach> 
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
