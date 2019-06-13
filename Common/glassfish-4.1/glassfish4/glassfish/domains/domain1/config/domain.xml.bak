@@ -57,7 +57,7 @@
     <server config-ref="server-config" name="server">
       <application-ref ref="WebServices" virtual-servers="server"></application-ref>
       <application-ref ref="mavenproject1" virtual-servers="server"></application-ref>
-      <application-ref ref="ChuanDauRa" virtual-servers="server"></application-ref>
+      <application-ref ref="ChuanDauRa_API" virtual-servers="server"></application-ref>
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
       <resource-ref ref="jdbc/__default"></resource-ref>
       <resource-ref ref="jdbc/sample"></resource-ref>
@@ -469,12 +469,12 @@
         <engine sniffer="web"></engine>
       </module>
     </application>
-    <application context-root="/ChuanDauRa" object-type="user" name="ChuanDauRa" directory-deployed="true" location="file:/C:/Users/Hayama/Desktop/javaproject/ChuanDauRa/ChuanDauRa/build/web/">
+    <application context-root="/ChuanDauRa_API" object-type="user" name="ChuanDauRa_API" directory-deployed="true" location="file:/C:/Users/Hayama/Desktop/javaproject/ChuanDauRa/ChuanDauRa_API/build/web/">
       <property name="archiveType" value="war"></property>
-      <property name="appLocation" value="file:/C:/Users/Hayama/Desktop/javaproject/ChuanDauRa/ChuanDauRa/build/web/"></property>
+      <property name="appLocation" value="file:/C:/Users/Hayama/Desktop/javaproject/ChuanDauRa/ChuanDauRa_API/build/web/"></property>
       <property name="defaultAppName" value="web"></property>
       <property name="keepSessions" value="true"></property>
-      <module name="ChuanDauRa">
+      <module name="ChuanDauRa_API">
         <engine sniffer="security"></engine>
         <engine sniffer="web"></engine>
       </module>
