@@ -9802,3 +9802,93 @@ java.io.OptionalDataException
 [2019-06-13T19:45:11.102+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.core] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429911102] [levelValue: 800] [[
   ChuanDauRa_API was successfully deployed in 3,726 milliseconds.]]
 
+[2019-06-13T19:45:13.595+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913595] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:13.646+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913646] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:13.658+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913658] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:13.660+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913660] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:13.661+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913661] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:13.662+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913662] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:13.829+0700] [glassfish 4.1] [INFO] [AS-WEB-GLUE-00172] [javax.enterprise.web] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913829] [levelValue: 800] [[
+  Loading application [ChuanDauRa] at [/ChuanDauRa]]]
+
+[2019-06-13T19:45:13.852+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.core] [tid: _ThreadID=44 _ThreadName=admin-listener(1)] [timeMillis: 1560429913852] [levelValue: 800] [[
+  ChuanDauRa was successfully deployed in 502 milliseconds.]]
+
+[2019-06-13T19:45:16.377+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916377] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.438+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916438] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.447+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916447] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.448+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916448] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.449+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916449] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.450+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916450] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.451+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916451] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.452+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916452] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.453+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916453] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.454+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916454] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:16.568+0700] [glassfish 4.1] [INFO] [] [org.glassfish.jersey.servlet.init.JerseyServletContainerInitializer] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916568] [levelValue: 800] [[
+  Registering the Jersey servlet application, named com.main.ApplicationConfig, at the servlet mapping /chuandaura/*, with the Application class of the same name.]]
+
+[2019-06-13T19:45:16.593+0700] [glassfish 4.1] [INFO] [] [org.glassfish.jersey.server.ApplicationHandler] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916593] [levelValue: 800] [[
+  Initiating Jersey application, version Jersey: 2.10.4 2014-08-08 15:09:00...]]
+
+[2019-06-13T19:45:16.698+0700] [glassfish 4.1] [INFO] [AS-WEB-GLUE-00172] [javax.enterprise.web] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916698] [levelValue: 800] [[
+  Loading application [ChuanDauRa_API] at [/ChuanDauRa_API]]]
+
+[2019-06-13T19:45:16.721+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.core] [tid: _ThreadID=48 _ThreadName=admin-listener(5)] [timeMillis: 1560429916721] [levelValue: 800] [[
+  ChuanDauRa_API was successfully deployed in 627 milliseconds.]]
+
+[2019-06-13T19:45:18.910+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429918910] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:19.001+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429919001] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:19.012+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429919012] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:19.013+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429919013] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:19.014+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429919014] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:19.015+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.tools.deployment.common] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429919015] [levelValue: 800] [[
+  visiting unvisited references]]
+
+[2019-06-13T19:45:19.173+0700] [glassfish 4.1] [INFO] [AS-WEB-GLUE-00172] [javax.enterprise.web] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429919173] [levelValue: 800] [[
+  Loading application [ChuanDauRa] at [/ChuanDauRa]]]
+
+[2019-06-13T19:45:19.187+0700] [glassfish 4.1] [INFO] [] [javax.enterprise.system.core] [tid: _ThreadID=46 _ThreadName=admin-listener(3)] [timeMillis: 1560429919187] [levelValue: 800] [[
+  ChuanDauRa was successfully deployed in 421 milliseconds.]]
+
