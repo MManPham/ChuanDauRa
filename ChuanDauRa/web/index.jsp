@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-info text-light py-3 main-nav">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjhjPfY_97WAhWCOI8KHSvHA34QjRwIBw&url=http%3A%2F%2Fpluspng.com%2Fhp-png-1793.html&psig=AOvVaw38ZFiKrvcpgGwQUMhu9Vx8&ust=1507481987906950" alt="Logo"></a>
+                <a class="navbar-brand" href="index.html"><img src="https://courses.uit.edu.vn/theme/website_monhoc/pix/logo-header.png" alt="Logo" alt="Logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -37,7 +37,7 @@
                     </div>
                     <form id="Login" action="LoginServlet" method="POST">
                         <div class="form-group">
-                            <input type="text" name="yourId" class="form-control" id="inputEmail" value ="GV0001" placeholder="VD: 16521805">
+                            <input type="text" name="yourId" class="form-control" id="inputEmail" value ="12340001" placeholder="VD: 16521805">
                         </div>
                         <div class="form-group">
                             <input type="password" name="yourPassword" class="form-control" id="inputPassword" value="Pass" placeholder="Mật khẩu">

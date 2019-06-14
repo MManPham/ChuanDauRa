@@ -2,13 +2,13 @@
   <security-configurations>
     <authentication-service default="true" name="adminAuth" use-password-credential="true">
       <security-provider provider-name="adminSpc" name="spcrealm" type="LoginModule">
-        <login-module-config control-flag="sufficient" module-class="com.sun.enterprise.admin.util.AdminLoginModule" name="adminSpecialLM">
+        <login-module-config module-class="com.sun.enterprise.admin.util.AdminLoginModule" control-flag="sufficient" name="adminSpecialLM">
           <property name="config" value="server-config"></property>
           <property name="auth-realm" value="admin-realm"></property>
         </login-module-config>
       </security-provider>
       <security-provider provider-name="adminFile" name="filerealm" type="LoginModule">
-        <login-module-config control-flag="sufficient" module-class="com.sun.enterprise.security.auth.login.FileLoginModule" name="adminFileLM">
+        <login-module-config module-class="com.sun.enterprise.security.auth.login.FileLoginModule" control-flag="sufficient" name="adminFileLM">
           <property name="config" value="server-config"></property>
           <property name="auth-realm" value="admin-realm"></property>
         </login-module-config>
@@ -46,7 +46,7 @@
       <property name="URL" value="jdbc:derby://localhost:1527/sample"></property>
       <property name="Password" value="app"></property>
     </jdbc-connection-pool>
-    <connector-connection-pool max-pool-size="250" resource-adapter-name="jmsra" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
+    <connector-connection-pool resource-adapter-name="jmsra" max-pool-size="250" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" object-type="system-all-req" jndi-name="jms/__defaultConnectionFactory"></connector-resource>
     <context-service object-type="system-all" jndi-name="concurrent/__defaultContextService"></context-service>
     <managed-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedExecutorService"></managed-executor-service>
@@ -57,6 +57,7 @@
     <server config-ref="server-config" name="server">
       <application-ref ref="WebServices" virtual-servers="server"></application-ref>
       <application-ref ref="mavenproject1" virtual-servers="server"></application-ref>
+      <application-ref ref="telephoneSearchWeb" virtual-servers="server"></application-ref>
       <application-ref ref="ChuanDauRa_API" virtual-servers="server"></application-ref>
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
       <resource-ref ref="jdbc/__default"></resource-ref>
@@ -100,7 +101,7 @@
       <transaction-service tx-log-dir="${com.sun.aas.instanceRoot}/logs"></transaction-service>
       <batch-runtime-configuration></batch-runtime-configuration>
       <jms-service default-jms-host="default_JMS_host" type="EMBEDDED">
-        <jms-host port="${JMS_PROVIDER_PORT}" host="localhost" name="default_JMS_host"></jms-host>
+        <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
       </jms-service>
       <cdi-service></cdi-service>
       <web-container>
@@ -236,7 +237,7 @@
         </transports>
       </network-config>
       <thread-pools>
-        <thread-pool name="admin-thread-pool" max-queue-size="256" max-thread-pool-size="50"></thread-pool>
+        <thread-pool name="admin-thread-pool" max-thread-pool-size="50" max-queue-size="256"></thread-pool>
         <thread-pool name="http-thread-pool"></thread-pool>
         <thread-pool name="thread-pool-1" max-thread-pool-size="200"></thread-pool>
       </thread-pools>
@@ -285,7 +286,7 @@
       </ejb-container>
       <mdb-container></mdb-container>
       <jms-service addresslist-behavior="priority" default-jms-host="default_JMS_host" type="EMBEDDED">
-        <jms-host port="${JMS_PROVIDER_PORT}" host="localhost" name="default_JMS_host"></jms-host>
+        <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
       </jms-service>
       <log-service file="${com.sun.aas.instanceRoot}/logs/server.log" log-rotation-limit-in-bytes="2000000">
         <module-log-levels></module-log-levels>
@@ -451,7 +452,7 @@
   </secure-admin>
   <clusters></clusters>
   <applications>
-    <application context-root="/WebServices" object-type="user" directory-deployed="true" name="WebServices" location="file:/C:/Users/Man%20Pham/Documents/GitHub/ChuanDauRa/WebServices/target/WebServices-1.0-SNAPSHOT/">
+    <application context-root="/WebServices" object-type="user" name="WebServices" directory-deployed="true" location="file:/C:/Users/Man%20Pham/Documents/GitHub/ChuanDauRa/WebServices/target/WebServices-1.0-SNAPSHOT/">
       <property name="appLocation" value="file:/C:/Users/Man%20Pham/Documents/GitHub/ChuanDauRa/WebServices/target/WebServices-1.0-SNAPSHOT/"></property>
       <property name="archiveType" value="war"></property>
       <property name="defaultAppName" value="WebServices-1.0-SNAPSHOT"></property>
@@ -460,7 +461,7 @@
         <engine sniffer="web"></engine>
       </module>
     </application>
-    <application context-root="/mavenproject1" object-type="user" directory-deployed="true" name="mavenproject1" location="file:/C:/Users/Man%20Pham/Documents/NetBeansProjects/mavenproject1/target/mavenproject1-1.0-SNAPSHOT/">
+    <application context-root="/mavenproject1" object-type="user" name="mavenproject1" directory-deployed="true" location="file:/C:/Users/Man%20Pham/Documents/NetBeansProjects/mavenproject1/target/mavenproject1-1.0-SNAPSHOT/">
       <property name="appLocation" value="file:/C:/Users/Man%20Pham/Documents/NetBeansProjects/mavenproject1/target/mavenproject1-1.0-SNAPSHOT/"></property>
       <property name="archiveType" value="war"></property>
       <property name="defaultAppName" value="mavenproject1-1.0-SNAPSHOT"></property>
@@ -469,11 +470,19 @@
         <engine sniffer="web"></engine>
       </module>
     </application>
-    <application context-root="/ChuanDauRa_API" object-type="user" name="ChuanDauRa_API" directory-deployed="true" location="file:/C:/Users/Man%20Pham/Documents/GitHub/ChuanDauRa/ChuanDauRa_API/build/web/">
+    <application context-root="/telephoneSearchWeb" object-type="user" directory-deployed="true" name="telephoneSearchWeb" location="file:/C:/Users/Hayama/Documents/NetBeansProjects/telephoneSearchWeb/build/web/">
+      <property name="appLocation" value="file:/C:/Users/Hayama/Documents/NetBeansProjects/telephoneSearchWeb/build/web/"></property>
       <property name="archiveType" value="war"></property>
-      <property name="appLocation" value="file:/C:/Users/Man%20Pham/Documents/GitHub/ChuanDauRa/ChuanDauRa_API/build/web/"></property>
       <property name="defaultAppName" value="web"></property>
-      <property name="keepSessions" value="true"></property>
+      <module name="telephoneSearchWeb">
+        <engine sniffer="security"></engine>
+        <engine sniffer="web"></engine>
+      </module>
+    </application>
+    <application context-root="/ChuanDauRa_API" object-type="user" name="ChuanDauRa_API" directory-deployed="true" location="file:/C:/Users/Hayama/Desktop/javaproject/ChuanDauRa/ChuanDauRa_API/build/web/">
+      <property name="appLocation" value="file:/C:/Users/Hayama/Desktop/javaproject/ChuanDauRa/ChuanDauRa_API/build/web/"></property>
+      <property name="archiveType" value="war"></property>
+      <property name="defaultAppName" value="web"></property>
       <module name="ChuanDauRa_API">
         <engine sniffer="security"></engine>
         <engine sniffer="web"></engine>

@@ -18,16 +18,18 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-info text-light py-3 main-nav">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjhjPfY_97WAhWCOI8KHSvHA34QjRwIBw&url=http%3A%2F%2Fpluspng.com%2Fhp-png-1793.html&psig=AOvVaw38ZFiKrvcpgGwQUMhu9Vx8&ust=1507481987906950" alt="Logo"></a>
+                <a class="navbar-brand" href="index.html"><img src="https://courses.uit.edu.vn/theme/website_monhoc/pix/logo-header.png" alt="Logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                
+                <label class="ml-auto mr-2  text-light mb-0">Nguyen Van A</label>|&nbsp;
+                <a href="#" class=" text-light"> Đăng xuất</a>
 
             </div>
         </nav>
     </header>
-    <body>
+    <body style=" background: #ccf5ff;">
         <%
             if (session.getAttribute("sinhvien") == null) {
                 response.sendRedirect("index.jsp");
@@ -35,7 +37,7 @@
 
         %>
 
-        <div class="container" style="padding-top: 30px;margin-top: 50px; box-shadow: 0 0 3px 3px #a3a3c2; background: #e6f2ff;border-radius: 5px;">
+        <div class="container" style="padding-top: 30px;margin-top: 50px; box-shadow: 0 0 3px 3px #a3a3c2; background: white;border-radius: 5px;">
             <div id="products" class="row view-group">
                 <div class="item col-xs-8 col-lg-8">
 

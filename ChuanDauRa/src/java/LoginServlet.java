@@ -139,7 +139,26 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // processRequest(request, response);
+//        PrintWriter out = response.getWriter();
+        String mssv = request.getParameter("mssv"); 
+//        out.println("Hello world");
+//        out.println(mssv);
+        
+        HttpLogin _httpLogin = null;
+        String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
+        _httpLogin = new HttpLogin();
+        SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
+        JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
+                
+        ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("sinhvien", SV_Response);
+        session.setAttribute("ketquaHT", LS_SV_MH);
+
+                //go to Web Sinh Vien
+        response.sendRedirect("WebProfile/sinhvien.jsp");
     }
 
     /**
