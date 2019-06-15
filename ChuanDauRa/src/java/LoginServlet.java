@@ -141,24 +141,77 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         // processRequest(request, response);
 //        PrintWriter out = response.getWriter();
-        String mssv = request.getParameter("mssv"); 
+//        String mssv = request.getParameter("mssv");
 //        out.println("Hello world");
 //        out.println(mssv);
-        
-        HttpLogin _httpLogin = null;
-        String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
-        _httpLogin = new HttpLogin();
-        SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
-        JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
-                
-        ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
 
-        HttpSession session = request.getSession();
-        session.setAttribute("sinhvien", SV_Response);
-        session.setAttribute("ketquaHT", LS_SV_MH);
+//        HttpLogin _httpLogin = null;
+//        String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
+//        _httpLogin = new HttpLogin();
+//        SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
+//        JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
+//                
+//        ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+//
+//        HttpSession session = request.getSession();
+//        session.setAttribute("sinhvien", SV_Response);
+//        session.setAttribute("ketquaHT", LS_SV_MH);
+//
+//                //go to Web Sinh Vien
+//        response.sendRedirect("sinhvien.jsp");
+        System.out.print("hello world");
 
-                //go to Web Sinh Vien
-        response.sendRedirect("WebProfile/sinhvien.jsp");
+        if (!(request.getParameter("mssv") == null)) {
+            String mssv = request.getParameter("mssv");
+
+            HttpLogin _httpLogin = null;
+            String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
+            _httpLogin = new HttpLogin();
+            SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
+            JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
+
+            ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("sinhvien", SV_Response);
+            session.setAttribute("ketquaHT", LS_SV_MH);
+
+            //go to Web Sinh Vien
+            response.sendRedirect("sinhvien.jsp");
+        } else {
+            String maLop = request.getParameter("lopMonHoc");
+            String mssv = request.getSession().getAttribute("mssv").toString();
+            System.out.print(mssv);
+
+            HttpLogin _httpLogin = null;
+            String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
+            _httpLogin = new HttpLogin();
+            SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
+            JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
+
+            ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+
+            if (!maLop.equals("All")) {
+                ArrayList<testSinhvienMonhocW> monHocDuocChon = new ArrayList<>();
+                for (testSinhvienMonhocW x : LS_SV_MH) {
+                    if (x.getMaLopMH().equals(maLop)) {
+                        monHocDuocChon.add(x);
+                    }
+                }
+
+                HttpSession session = request.getSession();
+                session.setAttribute("sinhvien", SV_Response);
+                session.setAttribute("ketquaHT", monHocDuocChon);
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("sinhvien", SV_Response);
+                session.setAttribute("ketquaHT", LS_SV_MH);
+            }
+
+            //go to Web Sinh Vien
+            response.sendRedirect("sinhvien.jsp");
+        }
+
     }
 
     /**
@@ -209,11 +262,17 @@ public class LoginServlet extends HttpServlet {
                 JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + _id));
 
                 ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
-
+                List<String> danhSachMonHoc = new ArrayList<>();
+                       
+                for(testSinhvienMonhocW x: LS_SV_MH){
+                    danhSachMonHoc.add(x.getMaLopMH());
+                }
                 HttpSession session = request.getSession();
+                session.setAttribute("danhsachmon", danhSachMonHoc);
+                session.setAttribute("mssv", _id);
                 session.setAttribute("sinhvien", SV_Response);
                 session.setAttribute("ketquaHT", LS_SV_MH);
-
+                
                 //go to Web Sinh Vien
                 response.sendRedirect("sinhvien.jsp");
             }
@@ -234,9 +293,3 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-
-
-
-

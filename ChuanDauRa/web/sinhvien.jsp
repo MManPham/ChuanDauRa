@@ -57,20 +57,17 @@
                         <p>- Tổng chuẩn đầu ra hoàn thành: 7/13</p><hr>
                         <h1>Các khóa học</h1>
                         <h2>Tìm kiếm</h2>
-                        Khóa học <select id="options" onchange="optionCheck()">
-                            <option value="show">Show Div</option>
-                            <option value="goto">Go To Google</option>
+                       <form action="LoginServlet" method="GET">
+                        Khóa học <select  name="lopMonHoc">
+                            <option  value="All"> <c:out value = "Xem tất cả"/></option>
+                            <c:forEach items="${danhsachmon}"  var="LopMonHoc" >
+                            
+                                <option  value="${LopMonHoc}"> <c:out value = "${LopMonHoc}"/></option>
+                            </c:forEach>>
                         </select>&emsp;
-                        Năm <select id="options" onchange="optionCheck()">
-                            <option value="show">Show Div</option>
-                            <option value="goto">Go To Google</option>
-                        </select>&emsp;
-                        Học kỳ <select id="options" onchange="optionCheck()">
-                            <option value="show">HK1</option>
-                            <option value="goto">HK2</option>
-                            <option value="goto">HK3</option>
-                        </select>&emsp;&emsp;&emsp;
-                        <button class="btn-info">Xem</button><br>
+                        <input type="submit" value="Xem">
+                        <br>
+                        </form>
                         </hr>
                         <c:forEach items="${ketquaHT}"  var="kq_mh" >
                             <div class="thumbnail card m-2 row">

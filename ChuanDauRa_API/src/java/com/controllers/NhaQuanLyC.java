@@ -6,6 +6,7 @@
 package com.controllers;
 
 import com.main.ConnectDB;
+import com.models.CDR_KH_KQ;
 import com.models.GiangVien;
 import com.models.Lop_CN;
 import com.models.Lop_MH;
@@ -108,4 +109,58 @@ public class NhaQuanLyC {
             }
         }
     }
+    
+        @GET
+    @Path("{id}/{year}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CDR_KH_KQ> getAVGYear(@PathParam("id") String id, @PathParam("year") int year) throws ClassNotFoundException {
+        Connection con = null;
+        ResultSet rs = null;
+
+        SinhVienC Sinhvien = new SinhVienC();
+        int count = 0;
+        List<CDR_KH_KQ> danhSachChuanDauRa = null;
+        try {
+            con = ConnectDB.makeConnect();
+            rs = con.prepareStatement("SELECT SINHVIEN.MSSV\n"
+                    + "FROM SINHVIEN, KHOA, CHUYENNGANH "
+                    + "WHERE SINHVIEN.MACHUYENNGANH = CHUYENNGANH.MACHUYENNGANH AND CHUYENNGANH.MAKHOA = KHOA.MAKHOA AND "
+                    + "MATRUONGKHOA = '" + id + "' AND SINHVIEN.NIENKHOA = '" + year + "'").executeQuery();
+
+            while (rs.next()) {
+                List<CDR_KH_KQ> temp = new ArrayList<>(Sinhvien.findSV(rs.getString("MSSV")).getChuanDauRA_KH());
+                if (danhSachChuanDauRa == null) {
+                    danhSachChuanDauRa = new ArrayList<>(temp);
+                } else {
+                    for (CDR_KH_KQ x : temp) {
+                        for (int i = 0; i < danhSachChuanDauRa.size(); i++) {
+                            if (x.getChuanDaura().equals(danhSachChuanDauRa.get(i).getChuanDaura())) {
+                                danhSachChuanDauRa.get(i).setKetQua(danhSachChuanDauRa.get(i).getKetQua() + x.getKetQua());
+                            }
+                        }
+                    }
+                }
+                count++;
+            }
+
+            for (int i = 0; i < danhSachChuanDauRa.size(); i++) {
+                danhSachChuanDauRa.get(i).setKetQua(danhSachChuanDauRa.get(i).getKetQua() / count);
+            }
+
+            return danhSachChuanDauRa;
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
 }

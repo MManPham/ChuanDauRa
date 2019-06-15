@@ -48,6 +48,7 @@
                                     <c:out value = "${gv.getTenGiangVien()}"/>
                                 </button></c:if>
                         </c:forEach>
+
                     </div>
                 </div>
             </c:if>
@@ -140,7 +141,7 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>
-                                                    <form action="../LoginServlet" method="GET">
+                                                    <form action="LoginServlet" method="GET">
                                                         <input type="hidden" name="mssv" value="${danhSachSinhVien.getMssv()}" > 
                                                         <input class='btn btn-info' type="submit" value="Chi tiết" />
                                                     </form>
@@ -151,8 +152,22 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
+                    <c:if test = "${isNQL}">
+                        <form class="form-inline" action="ChartServlet">
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="inputPassword2" class="sr-only">Password</label>
+                                <input type="number" class="form-control" id="yearOne" name ="yearOne" placeholder="2016">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="inputPassword2" class="sr-only">Password</label>
+                                <input type="number" class="form-control" id="yearTwo" name="yearTwo" placeholder="2017">
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Xem biển đồ</button>
+                        </form>
+                    </c:if>
                 </div>
             </div>
     </body>
