@@ -74,7 +74,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th >Tên sinh viên</th>
+                                                <th >MSSV</th>
                                                 <th  class="text-center" >Quá trình</th>
                                                 <th class="text-center">Giữa kỳ</th>
                                                 <th class="text-center">Thực hành</th>
@@ -87,7 +87,7 @@
                                             <c:forEach varStatus="loop" items="${ds_lop_mh.getDs_SV()}"  var="lop_mh" >
                                                 <tr class="sv_lmh">
                                                     <td class="font-weight-bold">${loop.index +1}</td>
-                                                    <td ><c:out value = "${lop_mh.getTensv()}"/></td>
+                                                    <td ><c:out value = "${lop_mh.getMssv()}"/></td>
                                                     <td class="text-center"><c:out value = "${lop_mh.getDiemqt()}"/></td>
                                                     <td class="text-center"><c:out value = "${lop_mh.getDiemgk()}"/></td>
                                                     <td class="text-center"><c:out value = "${lop_mh.getDiemth()}"/></td>
@@ -102,6 +102,29 @@
 
                                         </tbody>
                                     </table>
+                                    <!-- bang trung binh chua dau ra  -->
+                                    
+                                     <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Chuẩn đầu ra trung bìng</th>
+                                                <th>Kết quả </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${ds_lop_mh.getChuan_dau_ra_TB()}"  var="cdt_tb" >
+                                                <tr>
+                                                    <td><c:out value = "${cdt_tb.getChuanDauRaMonHoc()}"/>  </td>
+                                                    <td>
+                                                             <c:out value = "${cdt_tb.getKetQua()}"/>%
+                                                        
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                    <!--/  bang trung binh chua dau ra  -->
                                 </div>
                             </c:forEach>
                         </div>
@@ -156,13 +179,13 @@
                         </div>
                     </div>
                     <c:if test = "${isNQL}">
-                        <form class="form-inline" action="ChartServlet">
+                        <form class="form-inline" action="ChartServlet" method="GET">
                             <div class="form-group mx-sm-3 mb-2">
-                                <label for="inputPassword2" class="sr-only">Password</label>
+                                
                                 <input type="number" class="form-control" id="yearOne" name ="yearOne" placeholder="2016">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <label for="inputPassword2" class="sr-only">Password</label>
+                               
                                 <input type="number" class="form-control" id="yearTwo" name="yearTwo" placeholder="2017">
                             </div>
                             <button type="submit" class="btn btn-primary mb-2">Xem biển đồ</button>

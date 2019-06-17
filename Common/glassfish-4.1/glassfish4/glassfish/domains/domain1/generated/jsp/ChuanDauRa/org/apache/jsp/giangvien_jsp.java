@@ -117,7 +117,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <div class=\"row d-flex justify-content-between mb-3 mt-2\">\r\n");
       out.write("                                <select id=\"ds_ten_lcn\" class=\"form-control col-3 ml-3 \">\r\n");
       out.write("                                    ");
-      if (_jspx_meth_c_forEach_4(_jspx_page_context))
+      if (_jspx_meth_c_forEach_5(_jspx_page_context))
         return;
       out.write("\r\n");
       out.write("                                </select>\r\n");
@@ -138,7 +138,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                </thead>\r\n");
       out.write("                                <tbody id=\"ds_sv_cn\">\r\n");
       out.write("                                    ");
-      if (_jspx_meth_c_forEach_5(_jspx_page_context))
+      if (_jspx_meth_c_forEach_6(_jspx_page_context))
         return;
       out.write("\r\n");
       out.write("                                </tbody>\r\n");
@@ -441,7 +441,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("                                        <thead>\r\n");
           out.write("                                            <tr>\r\n");
           out.write("                                                <th>#</th>\r\n");
-          out.write("                                                <th >Tên sinh viên</th>\r\n");
+          out.write("                                                <th >MSSV</th>\r\n");
           out.write("                                                <th  class=\"text-center\" >Quá trình</th>\r\n");
           out.write("                                                <th class=\"text-center\">Giữa kỳ</th>\r\n");
           out.write("                                                <th class=\"text-center\">Thực hành</th>\r\n");
@@ -458,6 +458,24 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("\r\n");
           out.write("                                        </tbody>\r\n");
           out.write("                                    </table>\r\n");
+          out.write("                                    <!-- bang trung binh chua dau ra  -->\r\n");
+          out.write("                                    \r\n");
+          out.write("                                     <table id=\"sailorTable\" class=\"table table-striped table-bordered\" width=\"100%\">\r\n");
+          out.write("\r\n");
+          out.write("                                        <thead>\r\n");
+          out.write("                                            <tr>\r\n");
+          out.write("                                                <th>Chuẩn đầu ra trung bìng</th>\r\n");
+          out.write("                                                <th>Kết quả </th>\r\n");
+          out.write("                                            </tr>\r\n");
+          out.write("                                        </thead>\r\n");
+          out.write("                                        <tbody>\r\n");
+          out.write("                                            ");
+          if (_jspx_meth_c_forEach_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_1, _jspx_page_context, _jspx_push_body_count_c_forEach_1))
+            return true;
+          out.write("\r\n");
+          out.write("                                        </tbody>\r\n");
+          out.write("                                    </table>\r\n");
+          out.write("                                    <!--/  bang trung binh chua dau ra  -->\r\n");
           out.write("                                </div>\r\n");
           out.write("                            ");
           int evalDoAfterBody = _jspx_th_c_forEach_1.doAfterBody();
@@ -594,7 +612,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_3 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_out_3.setPageContext(_jspx_page_context);
     _jspx_th_c_out_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_2);
-    _jspx_th_c_out_3.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${lop_mh.getTensv()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_out_3.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${lop_mh.getMssv()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     int _jspx_eval_c_out_3 = _jspx_th_c_out_3.doStartTag();
     if (_jspx_th_c_out_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_3);
@@ -774,30 +792,36 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_forEach_4(PageContext _jspx_page_context)
+  private boolean _jspx_meth_c_forEach_4(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_1, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_1)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  c:forEach
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_4 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_4.setPageContext(_jspx_page_context);
-    _jspx_th_c_forEach_4.setParent(null);
-    _jspx_th_c_forEach_4.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${giangvien.getDanhSachLopCN()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    _jspx_th_c_forEach_4.setVar("ds_lop_sh");
+    _jspx_th_c_forEach_4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_1);
+    _jspx_th_c_forEach_4.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds_lop_mh.getChuan_dau_ra_TB()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_4.setVar("cdt_tb");
     int[] _jspx_push_body_count_c_forEach_4 = new int[] { 0 };
     try {
       int _jspx_eval_c_forEach_4 = _jspx_th_c_forEach_4.doStartTag();
       if (_jspx_eval_c_forEach_4 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\r\n");
-          out.write("                                        <option valeu=' ");
+          out.write("                                                <tr>\r\n");
+          out.write("                                                    <td>");
           if (_jspx_meth_c_out_11((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_4, _jspx_page_context, _jspx_push_body_count_c_forEach_4))
             return true;
-          out.write("' > ");
+          out.write("  </td>\r\n");
+          out.write("                                                    <td>\r\n");
+          out.write("                                                             ");
           if (_jspx_meth_c_out_12((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_4, _jspx_page_context, _jspx_push_body_count_c_forEach_4))
             return true;
-          out.write("</option>\r\n");
-          out.write("                                    ");
+          out.write("%\r\n");
+          out.write("                                                        \r\n");
+          out.write("                                                    </td>\r\n");
+          out.write("                                                </tr>\r\n");
+          out.write("                                            ");
           int evalDoAfterBody = _jspx_th_c_forEach_4.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -825,7 +849,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_11 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_out_11.setPageContext(_jspx_page_context);
     _jspx_th_c_out_11.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_4);
-    _jspx_th_c_out_11.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds_lop_sh.getTen_Lop()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_out_11.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${cdt_tb.getChuanDauRaMonHoc()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     int _jspx_eval_c_out_11 = _jspx_th_c_out_11.doStartTag();
     if (_jspx_th_c_out_11.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_11);
@@ -843,7 +867,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_12 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_out_12.setPageContext(_jspx_page_context);
     _jspx_th_c_out_12.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_4);
-    _jspx_th_c_out_12.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds_lop_sh.getTen_Lop()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_out_12.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${cdt_tb.getKetQua()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     int _jspx_eval_c_out_12 = _jspx_th_c_out_12.doStartTag();
     if (_jspx_th_c_out_12.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_12);
@@ -869,10 +893,13 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       if (_jspx_eval_c_forEach_5 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\r\n");
-          out.write("                                        ");
-          if (_jspx_meth_c_forEach_6((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_5, _jspx_page_context, _jspx_push_body_count_c_forEach_5))
+          out.write("                                        <option valeu=' ");
+          if (_jspx_meth_c_out_13((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_5, _jspx_page_context, _jspx_push_body_count_c_forEach_5))
             return true;
-          out.write("\r\n");
+          out.write("' > ");
+          if (_jspx_meth_c_out_14((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_5, _jspx_page_context, _jspx_push_body_count_c_forEach_5))
+            return true;
+          out.write("</option>\r\n");
           out.write("                                    ");
           int evalDoAfterBody = _jspx_th_c_forEach_5.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
@@ -893,44 +920,63 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_forEach_6(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_5, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_5)
+  private boolean _jspx_meth_c_out_13(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_5, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_5)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:out
+    org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_13 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
+    _jspx_th_c_out_13.setPageContext(_jspx_page_context);
+    _jspx_th_c_out_13.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_5);
+    _jspx_th_c_out_13.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds_lop_sh.getTen_Lop()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    int _jspx_eval_c_out_13 = _jspx_th_c_out_13.doStartTag();
+    if (_jspx_th_c_out_13.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_13);
+      return true;
+    }
+    _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_13);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_out_14(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_5, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_5)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:out
+    org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_14 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
+    _jspx_th_c_out_14.setPageContext(_jspx_page_context);
+    _jspx_th_c_out_14.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_5);
+    _jspx_th_c_out_14.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds_lop_sh.getTen_Lop()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    int _jspx_eval_c_out_14 = _jspx_th_c_out_14.doStartTag();
+    if (_jspx_th_c_out_14.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_14);
+      return true;
+    }
+    _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_14);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_6(PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  c:forEach
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_6 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_6.setPageContext(_jspx_page_context);
-    _jspx_th_c_forEach_6.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_5);
-    _jspx_th_c_forEach_6.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds_lop_sh.getDs_SV()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    _jspx_th_c_forEach_6.setVar("danhSachSinhVien");
+    _jspx_th_c_forEach_6.setParent(null);
+    _jspx_th_c_forEach_6.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${giangvien.getDanhSachLopCN()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_6.setVar("ds_lop_sh");
     int[] _jspx_push_body_count_c_forEach_6 = new int[] { 0 };
     try {
       int _jspx_eval_c_forEach_6 = _jspx_th_c_forEach_6.doStartTag();
       if (_jspx_eval_c_forEach_6 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\r\n");
-          out.write("                                            <tr>\r\n");
-          out.write("                                                <td>");
-          if (_jspx_meth_c_out_13((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_6, _jspx_page_context, _jspx_push_body_count_c_forEach_6))
-            return true;
-          out.write("</td>\r\n");
-          out.write("                                                <td>\r\n");
-          out.write("                                                    ");
+          out.write("                                        ");
           if (_jspx_meth_c_forEach_7((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_6, _jspx_page_context, _jspx_push_body_count_c_forEach_6))
             return true;
           out.write("\r\n");
-          out.write("                                                </td>\r\n");
-          out.write("                                                <td>\r\n");
-          out.write("                                                    <form action=\"LoginServlet\" method=\"GET\">\r\n");
-          out.write("                                                        <input type=\"hidden\" name=\"mssv\" value=\"");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getMssv()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\" > \r\n");
-          out.write("                                                        <input class='btn btn-info' type=\"submit\" value=\"Chi tiết\" />\r\n");
-          out.write("                                                    </form>\r\n");
-          out.write("                                                </td>\r\n");
-          out.write("\r\n");
-          out.write("                                            </tr>\r\n");
-          out.write("                                        ");
+          out.write("                                    ");
           int evalDoAfterBody = _jspx_th_c_forEach_6.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -950,24 +996,6 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_out_13(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_6, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_6)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:out
-    org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_13 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
-    _jspx_th_c_out_13.setPageContext(_jspx_page_context);
-    _jspx_th_c_out_13.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_6);
-    _jspx_th_c_out_13.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getMssv()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    int _jspx_eval_c_out_13 = _jspx_th_c_out_13.doStartTag();
-    if (_jspx_th_c_out_13.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_13);
-      return true;
-    }
-    _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_13);
-    return false;
-  }
-
   private boolean _jspx_meth_c_forEach_7(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_6, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_6)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -976,23 +1004,36 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_7 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_7.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_7.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_6);
-    _jspx_th_c_forEach_7.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getChuanDauRA_KH()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    _jspx_th_c_forEach_7.setVar("danhSachChuanDauRa");
+    _jspx_th_c_forEach_7.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ds_lop_sh.getDs_SV()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_7.setVar("danhSachSinhVien");
     int[] _jspx_push_body_count_c_forEach_7 = new int[] { 0 };
     try {
       int _jspx_eval_c_forEach_7 = _jspx_th_c_forEach_7.doStartTag();
       if (_jspx_eval_c_forEach_7 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\r\n");
-          out.write("                                                        ");
-          if (_jspx_meth_c_out_14((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_7, _jspx_page_context, _jspx_push_body_count_c_forEach_7))
-            return true;
-          out.write(' ');
-          out.write(':');
+          out.write("                                            <tr>\r\n");
+          out.write("                                                <td>");
           if (_jspx_meth_c_out_15((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_7, _jspx_page_context, _jspx_push_body_count_c_forEach_7))
             return true;
-          out.write("  \r\n");
+          out.write("</td>\r\n");
+          out.write("                                                <td>\r\n");
           out.write("                                                    ");
+          if (_jspx_meth_c_forEach_8((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_7, _jspx_page_context, _jspx_push_body_count_c_forEach_7))
+            return true;
+          out.write("\r\n");
+          out.write("                                                </td>\r\n");
+          out.write("                                                <td>\r\n");
+          out.write("                                                    <form action=\"LoginServlet\" method=\"GET\">\r\n");
+          out.write("                                                        <input type=\"hidden\" name=\"mssv\" value=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getMssv()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\" > \r\n");
+          out.write("                                                        <input class='btn btn-info' type=\"submit\" value=\"Chi tiết\" />\r\n");
+          out.write("                                                    </form>\r\n");
+          out.write("                                                </td>\r\n");
+          out.write("\r\n");
+          out.write("                                            </tr>\r\n");
+          out.write("                                        ");
           int evalDoAfterBody = _jspx_th_c_forEach_7.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -1012,24 +1053,6 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_out_14(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_7, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_7)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:out
-    org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_14 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
-    _jspx_th_c_out_14.setPageContext(_jspx_page_context);
-    _jspx_th_c_out_14.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_7);
-    _jspx_th_c_out_14.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachChuanDauRa.getChuanDaura()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    int _jspx_eval_c_out_14 = _jspx_th_c_out_14.doStartTag();
-    if (_jspx_th_c_out_14.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_14);
-      return true;
-    }
-    _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_14);
-    return false;
-  }
-
   private boolean _jspx_meth_c_out_15(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_7, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_7)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -1038,13 +1061,93 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_15 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_out_15.setPageContext(_jspx_page_context);
     _jspx_th_c_out_15.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_7);
-    _jspx_th_c_out_15.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachChuanDauRa.getKetQua()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_out_15.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getMssv()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     int _jspx_eval_c_out_15 = _jspx_th_c_out_15.doStartTag();
     if (_jspx_th_c_out_15.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_15);
       return true;
     }
     _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_15);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_8(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_7, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_7)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_8 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_8.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_8.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_7);
+    _jspx_th_c_forEach_8.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getChuanDauRA_KH()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_8.setVar("danhSachChuanDauRa");
+    int[] _jspx_push_body_count_c_forEach_8 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_8 = _jspx_th_c_forEach_8.doStartTag();
+      if (_jspx_eval_c_forEach_8 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\r\n");
+          out.write("                                                        ");
+          if (_jspx_meth_c_out_16((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_8, _jspx_page_context, _jspx_push_body_count_c_forEach_8))
+            return true;
+          out.write(' ');
+          out.write(':');
+          if (_jspx_meth_c_out_17((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_8, _jspx_page_context, _jspx_push_body_count_c_forEach_8))
+            return true;
+          out.write("  \r\n");
+          out.write("                                                    ");
+          int evalDoAfterBody = _jspx_th_c_forEach_8.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_8[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_8.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_8.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_8);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_out_16(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_8, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_8)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:out
+    org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_16 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
+    _jspx_th_c_out_16.setPageContext(_jspx_page_context);
+    _jspx_th_c_out_16.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_8);
+    _jspx_th_c_out_16.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachChuanDauRa.getChuanDaura()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    int _jspx_eval_c_out_16 = _jspx_th_c_out_16.doStartTag();
+    if (_jspx_th_c_out_16.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_16);
+      return true;
+    }
+    _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_16);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_out_17(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_8, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_8)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:out
+    org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_17 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
+    _jspx_th_c_out_17.setPageContext(_jspx_page_context);
+    _jspx_th_c_out_17.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_8);
+    _jspx_th_c_out_17.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachChuanDauRa.getKetQua()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    int _jspx_eval_c_out_17 = _jspx_th_c_out_17.doStartTag();
+    if (_jspx_th_c_out_17.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_17);
+      return true;
+    }
+    _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_17);
     return false;
   }
 
@@ -1061,13 +1164,13 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
     if (_jspx_eval_c_if_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\r\n");
-        out.write("                        <form class=\"form-inline\" action=\"ChartServlet\">\r\n");
+        out.write("                        <form class=\"form-inline\" action=\"ChartServlet\" method=\"GET\">\r\n");
         out.write("                            <div class=\"form-group mx-sm-3 mb-2\">\r\n");
-        out.write("                                <label for=\"inputPassword2\" class=\"sr-only\">Password</label>\r\n");
+        out.write("                                \r\n");
         out.write("                                <input type=\"number\" class=\"form-control\" id=\"yearOne\" name =\"yearOne\" placeholder=\"2016\">\r\n");
         out.write("                            </div>\r\n");
         out.write("                            <div class=\"form-group mx-sm-3 mb-2\">\r\n");
-        out.write("                                <label for=\"inputPassword2\" class=\"sr-only\">Password</label>\r\n");
+        out.write("                               \r\n");
         out.write("                                <input type=\"number\" class=\"form-control\" id=\"yearTwo\" name=\"yearTwo\" placeholder=\"2017\">\r\n");
         out.write("                            </div>\r\n");
         out.write("                            <button type=\"submit\" class=\"btn btn-primary mb-2\">Xem biển đồ</button>\r\n");

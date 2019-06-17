@@ -249,7 +249,9 @@ public class LoginServlet extends HttpServlet {
                     }
 
                     GiangVienW GV_Response = this.getGiangVienJson(_httpLogin.httpGetAccout(URL + "/giangvien/" + _id));
-
+                    for(int i = 0; i < GV_Response.getDanhSachLopMH().size(); i ++){
+                        GV_Response.getDanhSachLopMH().get(i).update_CDR();
+                    }
                     session.setAttribute("giangvien", GV_Response);
                     session.setAttribute("isNQL", isNQL);
 
@@ -293,3 +295,4 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

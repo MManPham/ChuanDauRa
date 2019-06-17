@@ -5,6 +5,7 @@
  */
 package com.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class Lop_MHW {
     private String ten_Lop;
     private String ma_Lop;
     private List<SinhvienMonhocW> ds_SV;
-
+    private List<CDR_MH_TBW> chuan_dau_ra_TB;
     public Lop_MHW() {
     }
 
@@ -49,6 +50,34 @@ public class Lop_MHW {
         this.ds_SV = ds_SV;
     }
     
+    public void update_CDR(){
+        this.chuan_dau_ra_TB = new ArrayList<>();
+        int count_sv = 0;
+        for( CDR_MHW x : this.ds_SV.get(0).getListCDR_MH()){
+            this.chuan_dau_ra_TB.add(new CDR_MH_TBW(x.getChuanDauRaMonHoc(),0));
+        }
+        
+        for( SinhvienMonhocW x : this.ds_SV){
+            for(int i = 0; i < x.getListCDR_MH().size(); i++){
+                   chuan_dau_ra_TB.get(i).setKetQua(chuan_dau_ra_TB.get(i).getKetQua()
+                           + x.getListCDR_MH().get(i).getKetQua());
+            }
+            count_sv ++;
+            
+        }
+        for(int i = 0; i < this.chuan_dau_ra_TB.size(); i++){
+            this.chuan_dau_ra_TB.get(i).setKetQua(this.chuan_dau_ra_TB.get(i).getKetQua()/count_sv);
+        }
+       
+    }
+
+    public List<CDR_MH_TBW> getChuan_dau_ra_TB() {
+        return chuan_dau_ra_TB;
+    }
+
+    public void setChuan_dau_ra_TB(List<CDR_MH_TBW> chuan_dau_ra_TB) {
+        this.chuan_dau_ra_TB = chuan_dau_ra_TB;
+    }
     
 }
 
