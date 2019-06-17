@@ -24,7 +24,7 @@ $(document).ready(() => {
             },
             displayLopCN: (sinhvien) => {
                 StringReturn = "<tr><td>" + sinhvien.mssv + "</td> <td>" + myWeb.Modals.readCDR_KH(sinhvien.chuanDauRA_KH) + "</td>\n\
-                                                 <td> <form action= '../LoginServlet' method='GET'>\n\
+                                                 <td> <form action= 'LoginServlet' method='GET'>\n\
                                                     <input type='hidden' name='mssv' value='" + sinhvien.mssv + "' />\n\
                                                     <input class='btn btn-info' type='submit' value='Chi tiết' /></form></td>\n\
                                                 </tr>"
@@ -129,6 +129,10 @@ $(document).ready(() => {
     }
     window.onload = main();
 })
+
+
+
+
 
 
 

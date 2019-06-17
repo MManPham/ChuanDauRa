@@ -151,19 +151,6 @@ public class SinhvienMonhoc implements Serializable {
         this.tenSV = tenSV;
     }
 
-    public SinhvienMonhoc(String mssv, String tenSV, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, int tinChi, List<CDR_MH> listCDR_MH) {
-        this.mssv = mssv;
-        this.tenSV = tenSV;
-        this.maLopMH = maLopMH;
-        this.tenLop = tenLop;
-        this.diemqt = diemqt;
-        this.diemgk = diemgk;
-        this.diemth = diemth;
-        this.diemck = diemck;
-        this.tinChi = tinChi;
-        this.listCDR_MH = listCDR_MH;
-    }
-    
 }
 
 

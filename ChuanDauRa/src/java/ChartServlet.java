@@ -119,8 +119,7 @@ public class ChartServlet extends HttpServlet {
         session.setAttribute("pieDataList", pieDataList);
         session.setAttribute("yearOne", yearOne);
         session.setAttribute("yearTwo", yearTwo);
-        
-        response.sendRedirect("http://localhost:8080/ChuanDauRa/chart.jsp");
+        response.sendRedirect("chart.jsp");
        
     }
 
@@ -135,7 +134,32 @@ public class ChartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // processRequest(request, response);
+        String yearOne = "2017";
+        String yearTwo = "2016";
+        HttpLogin _httpLogin = new HttpLogin();
+        String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura/nhaquanly/GV0001/";
+        
+        ArrayList<CDR_KH_KQW> yearOneCDRKH = this.getListCDRKH(URL + yearOne);
+        ArrayList<CDR_KH_KQW> yearTwoCDRKH = this.getListCDRKH(URL + yearTwo);
+        ChartModel chart = new ChartModel(yearOneCDRKH, yearTwoCDRKH);
+        List<Chart> pieDataList = chart.getDataArray();
+//        
+//        List b = new ArrayList();
+//        
+//        
+//        chart.getDataArray().forEach((x )->{
+//                List a = new ArrayList();
+//                a.add(x.getChuanDauRa());
+//                a.add((float)x.getKetQuaNienKhoaDau());
+//                a.add((float)x.getKetQuaNienKhoaSau());
+//                b.add(a);
+//                
+//            });
+        HttpSession session = request.getSession();
+        session.setAttribute("pieDataList", pieDataList.get(0));
+         // request.setAttribute("pieDataList", pieDataList);
+        System.out.print("hello world");
         
     }
 

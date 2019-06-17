@@ -12,10 +12,9 @@ import java.util.List;
  *
  * @author Hayama
  */
-public class ListCDR_MH {
- 
+public class testListCDR_MHW {
     private String maMon;
-    private List<CDR_MH> danhSach_CDR_CN;
+    private List<testCDR_MHW> danhSach_CDR_CN;
     
     public void setMaMon(String maMon) {
         this.maMon = maMon;
@@ -24,31 +23,29 @@ public class ListCDR_MH {
     public String getMaMon() {
         return maMon;
     }
-    public ListCDR_MH() {
+    public testListCDR_MHW() {
         danhSach_CDR_CN = new ArrayList<>();
     }
     
-    public void setDanhSach_CDR_CN(List<CDR_MH> danhSach_CDR_CN) {
+    public void setDanhSach_CDR_CN(List<testCDR_MHW> danhSach_CDR_CN) {
         this.danhSach_CDR_CN = danhSach_CDR_CN;
     }
 
-    public List<CDR_MH> getDanhSach_CDR_CN() {
+    public List<testCDR_MHW> getDanhSach_CDR_CN() {
         return danhSach_CDR_CN;
     }
     
-    public void add(CDR_MH cdr_mh) {
+    public void add(testCDR_MHW cdr_mh) {
         danhSach_CDR_CN.add(cdr_mh);
     }
 
-    public ListCDR_MH(String maMon, List<CDR_MH> danhSach_CDR_CN) {
+    public testListCDR_MHW(String maMon, List<testCDR_MHW> danhSach_CDR_CN) {
         this.danhSach_CDR_CN = new ArrayList<>();
         this.maMon = maMon;
-        for(CDR_MH x : danhSach_CDR_CN){
+        for(testCDR_MHW x : danhSach_CDR_CN){
             this.danhSach_CDR_CN.add(x);
         }
     }
-    
-    
     
     
 }

@@ -23,7 +23,7 @@ import com.models.ListCDR_MHW;
 import com.models.Lop_MHW;
 import com.models.SinhvienMonhocW;
 import com.models.SinhvienW;
-import com.models.SinhvienMonhocW;
+import com.models.testSinhvienMonhocW;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -61,16 +61,16 @@ public class LoginServlet extends HttpServlet {
         return SV_Response;
     }
 
-    public ArrayList<SinhvienMonhocW> getSVMHJson(JSONArray json_ls_kqmh, Boolean isSV) {
+    public ArrayList<testSinhvienMonhocW> getSVMHJson(JSONArray json_ls_kqmh, Boolean isSV) {
         Gson gson = new Gson();
-        ArrayList<SinhvienMonhocW> ls_kqmh = new ArrayList<>();
-        java.lang.reflect.Type listType = new TypeToken<List<SinhvienMonhocW>>() {
+        ArrayList<testSinhvienMonhocW> ls_kqmh = new ArrayList<>();
+        java.lang.reflect.Type listType = new TypeToken<List<testSinhvienMonhocW>>() {
         }.getType();
         for (int i = 0; i < json_ls_kqmh.length(); i++) {
             JSONObject chitiet_kqmh = json_ls_kqmh.getJSONObject(i);
             JsonParser jsonParser = new JsonParser();
             JsonObject gsonObject = (JsonObject) jsonParser.parse(chitiet_kqmh.toString());
-            SinhvienMonhocW temp = new Gson().fromJson(gsonObject, SinhvienMonhocW.class);
+            testSinhvienMonhocW temp = new Gson().fromJson(gsonObject, testSinhvienMonhocW.class);
             ls_kqmh.add(temp);
         }
 
@@ -136,14 +136,29 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public ArrayList<CDR_MHW> tinhTrungBinhChuanDauRaMonHoc(GiangVienW giangVien) {
-        ArrayList<CDR_MHW> temp = new ArrayList<>(giangVien.getDanhSachLopMH().get(1).getDs_SV().get(1).getListCDR_MH());
-            return null;
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // processRequest(request, response);
+//        PrintWriter out = response.getWriter();
+//        String mssv = request.getParameter("mssv");
+//        out.println("Hello world");
+//        out.println(mssv);
 
+//        HttpLogin _httpLogin = null;
+//        String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
+//        _httpLogin = new HttpLogin();
+//        SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
+//        JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
+//                
+//        ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+//
+//        HttpSession session = request.getSession();
+//        session.setAttribute("sinhvien", SV_Response);
+//        session.setAttribute("ketquaHT", LS_SV_MH);
+//
+//                //go to Web Sinh Vien
+//        response.sendRedirect("sinhvien.jsp");
         System.out.print("hello world");
 
         if (!(request.getParameter("mssv") == null)) {
@@ -153,9 +168,9 @@ public class LoginServlet extends HttpServlet {
             String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
             _httpLogin = new HttpLogin();
             SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
-            JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + mssv));
+            JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
 
-            ArrayList<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+            ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
 
             HttpSession session = request.getSession();
             session.setAttribute("sinhvien", SV_Response);
@@ -172,13 +187,13 @@ public class LoginServlet extends HttpServlet {
             String URL = "http://localhost:8080/ChuanDauRa_API/chuandaura";
             _httpLogin = new HttpLogin();
             SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + mssv));
-            JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + mssv));
+            JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + mssv));
 
-            ArrayList<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+            ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
 
             if (!maLop.equals("All")) {
-                ArrayList<SinhvienMonhocW> monHocDuocChon = new ArrayList<>();
-                for (SinhvienMonhocW x : LS_SV_MH) {
+                ArrayList<testSinhvienMonhocW> monHocDuocChon = new ArrayList<>();
+                for (testSinhvienMonhocW x : LS_SV_MH) {
                     if (x.getMaLopMH().equals(maLop)) {
                         monHocDuocChon.add(x);
                     }
@@ -198,8 +213,6 @@ public class LoginServlet extends HttpServlet {
         }
 
     }
-    
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -236,7 +249,7 @@ public class LoginServlet extends HttpServlet {
                     }
 
                     GiangVienW GV_Response = this.getGiangVienJson(_httpLogin.httpGetAccout(URL + "/giangvien/" + _id));
-                    List<CDR_MHW> AGVChuanDauRa = tinhTrungBinhChuanDauRaMonHoc(GV_Response);
+
                     session.setAttribute("giangvien", GV_Response);
                     session.setAttribute("isNQL", isNQL);
 
@@ -246,12 +259,12 @@ public class LoginServlet extends HttpServlet {
             } else {
 
                 SinhvienW SV_Response = this.getSinhVienJson(_httpLogin.httpGetAccout(URL + "/sinhvien/" + _id));
-                JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/ketquahoc/" + _id));
+                JSONArray json_ls_kqmh = new JSONArray(_httpLogin.httpGetAccout(URL + "/testketquahoc/" + _id));
 
-                ArrayList<SinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
+                ArrayList<testSinhvienMonhocW> LS_SV_MH = this.getSVMHJson(json_ls_kqmh, true);
                 List<String> danhSachMonHoc = new ArrayList<>();
                        
-                for(SinhvienMonhocW x: LS_SV_MH){
+                for(testSinhvienMonhocW x: LS_SV_MH){
                     danhSachMonHoc.add(x.getMaLopMH());
                 }
                 HttpSession session = request.getSession();

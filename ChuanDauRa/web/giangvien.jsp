@@ -74,7 +74,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th >MSSV</th>
+                                                <th >Tên sinh viên</th>
                                                 <th  class="text-center" >Quá trình</th>
                                                 <th class="text-center">Giữa kỳ</th>
                                                 <th class="text-center">Thực hành</th>
@@ -87,7 +87,7 @@
                                             <c:forEach varStatus="loop" items="${ds_lop_mh.getDs_SV()}"  var="lop_mh" >
                                                 <tr class="sv_lmh">
                                                     <td class="font-weight-bold">${loop.index +1}</td>
-                                                    <td ><c:out value = "${lop_mh.getMssv()}"/></td>
+                                                    <td ><c:out value = "${lop_mh.getTensv()}"/></td>
                                                     <td class="text-center"><c:out value = "${lop_mh.getDiemqt()}"/></td>
                                                     <td class="text-center"><c:out value = "${lop_mh.getDiemgk()}"/></td>
                                                     <td class="text-center"><c:out value = "${lop_mh.getDiemth()}"/></td>
@@ -156,13 +156,13 @@
                         </div>
                     </div>
                     <c:if test = "${isNQL}">
-                        <form class="form-inline" action="ChartServlet" method="GET">
+                        <form class="form-inline" action="ChartServlet">
                             <div class="form-group mx-sm-3 mb-2">
-                                
+                                <label for="inputPassword2" class="sr-only">Password</label>
                                 <input type="number" class="form-control" id="yearOne" name ="yearOne" placeholder="2016">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                               
+                                <label for="inputPassword2" class="sr-only">Password</label>
                                 <input type="number" class="form-control" id="yearTwo" name="yearTwo" placeholder="2017">
                             </div>
                             <button type="submit" class="btn btn-primary mb-2">Xem biển đồ</button>

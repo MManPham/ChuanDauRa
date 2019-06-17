@@ -6,16 +6,20 @@
 package com.models;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 
 /**
  *
- * @author Hayama
+ * @author Man Pham
  */
 public class SinhvienMonhocW implements Serializable {
+
     private String mssv;
-    private String tenSV;
+    private String tensv;
     private String maLopMH;
     private String tenLop;
     private Double diemqt;
@@ -23,11 +27,23 @@ public class SinhvienMonhocW implements Serializable {
     private Double diemth;
     private Double diemck;
     private int tinChi;
+    private ArrayList<ChiTietSV_MH> dsChiTietSV;
     private List<CDR_MHW> listCDR_MH;
 
-    public SinhvienMonhocW(String mssv, String tenSV, String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, int tinChi, List<CDR_MHW> listCDR_MH) {
+    public SinhvienMonhocW() {
+    }
+
+   public SinhvienMonhocW(String mssv, String tenSV, Double diemqt, Double diemgk, Double diemth, Double diemck, List<CDR_MHW> listCDR_MH) {
         this.mssv = mssv;
-        this.tenSV = tenSV;
+        this.tensv = tenSV;
+        this.diemqt = diemqt;
+        this.diemgk = diemgk;
+        this.diemth = diemth;
+        this.diemck = diemck;
+        this.listCDR_MH = listCDR_MH;
+    }
+   
+    public SinhvienMonhocW( String maLopMH, String tenLop, Double diemqt, Double diemgk, Double diemth, Double diemck, int tinChi, List<CDR_MHW> listCDR_MH) {
         this.maLopMH = maLopMH;
         this.tenLop = tenLop;
         this.diemqt = diemqt;
@@ -40,93 +56,109 @@ public class SinhvienMonhocW implements Serializable {
 
 
 
-
-    public SinhvienMonhocW() {
-    }
-    
-    public String getMssv() {
-        return mssv;
+    public String getTensv() {
+        return tensv;
     }
 
-    public String getTenSV() {
-        return tenSV;
+    public void setTensv(String tensv) {
+        this.tensv = tensv;
     }
 
-    public String getMaLopMH() {
-        return maLopMH;
+    public ArrayList<ChiTietSV_MH> getDsChiTietSV() {
+        return dsChiTietSV;
+    }
+
+    public void setDsChiTietSV(ArrayList<ChiTietSV_MH> dsChiTietSV) {
+        this.dsChiTietSV = dsChiTietSV;
+    }
+
+    public List<CDR_MHW> getListCDR_MH() {
+        return listCDR_MH;
+    }
+
+    public void setListCDR_MH(List<CDR_MHW> listCDR_MH) {
+        this.listCDR_MH = listCDR_MH;
     }
 
     public String getTenLop() {
         return tenLop;
     }
 
-    public Double getDiemqt() {
-        return diemqt;
-    }
-
-    public Double getDiemgk() {
-        return diemgk;
-    }
-
-    public Double getDiemth() {
-        return diemth;
-    }
-
-    public Double getDiemck() {
-        return diemck;
-    }
-
-    public int getTinChi() {
-        return tinChi;
-    }
-
-
-    public List<CDR_MHW> getListCDR_MH() {
-        return listCDR_MH;
-    }
-
-    public void setMssv(String mssv) {
-        this.mssv = mssv;
-    }
-
-    public void setTenSV(String tenSV) {
-        this.tenSV = tenSV;
-    }
-
-    public void setMaLopMH(String maLopMH) {
-        this.maLopMH = maLopMH;
-    }
-
     public void setTenLop(String tenLop) {
         this.tenLop = tenLop;
+    }
+
+    public ArrayList<ChiTietSV_MH> getChiTietSV() {
+        return dsChiTietSV;
+    }
+
+    public void setChiTietSV(ArrayList<ChiTietSV_MH> chiTietSV) {
+        this.dsChiTietSV = chiTietSV;
+    }
+
+    public Double getDiemqt() {
+        return diemqt;
     }
 
     public void setDiemqt(Double diemqt) {
         this.diemqt = diemqt;
     }
 
+    public Double getDiemgk() {
+        return diemgk;
+    }
+
     public void setDiemgk(Double diemgk) {
         this.diemgk = diemgk;
+    }
+
+    public Double getDiemth() {
+        return diemth;
     }
 
     public void setDiemth(Double diemth) {
         this.diemth = diemth;
     }
 
+    public Double getDiemck() {
+        return diemck;
+    }
+
     public void setDiemck(Double diemck) {
         this.diemck = diemck;
+    }
+
+    public String getMssv() {
+        return mssv;
+    }
+
+    public void setMssv(String mssv) {
+        this.mssv = mssv;
+    }
+
+    public String getMaLopMH() {
+        return this.maLopMH;
+    }
+
+    public void setMaLopMH(String malopmh) {
+        this.mssv = malopmh;
+    }
+
+    public int getTinChi() {
+        return tinChi;
     }
 
     public void setTinChi(int tinChi) {
         this.tinChi = tinChi;
     }
 
- 
-
-    public void setListCDR_MH(List<CDR_MHW> listCDR_MH) {
-        this.listCDR_MH = listCDR_MH;
-    }
-    
-
-
 }
+
+
+
+
+
+
+
+
+

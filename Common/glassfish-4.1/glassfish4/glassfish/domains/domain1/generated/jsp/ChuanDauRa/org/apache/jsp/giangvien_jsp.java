@@ -143,8 +143,13 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                                </tbody>\r\n");
       out.write("                            </table>\r\n");
+      out.write("\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
+      out.write("                    ");
+      if (_jspx_meth_c_if_2(_jspx_page_context))
+        return;
+      out.write("\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("    </body>\r\n");
@@ -288,6 +293,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                        ");
         if (_jspx_meth_c_forEach_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_if_0, _jspx_page_context))
           return true;
+        out.write("\r\n");
         out.write("\r\n");
         out.write("                    </div>\r\n");
         out.write("                </div>\r\n");
@@ -915,7 +921,7 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("\r\n");
           out.write("                                                </td>\r\n");
           out.write("                                                <td>\r\n");
-          out.write("                                                    <form action=\"../LoginServlet\" method=\"GET\">\r\n");
+          out.write("                                                    <form action=\"LoginServlet\" method=\"GET\">\r\n");
           out.write("                                                        <input type=\"hidden\" name=\"mssv\" value=\"");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${danhSachSinhVien.getMssv()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("\" > \r\n");
@@ -1039,6 +1045,44 @@ public final class giangvien_jsp extends org.apache.jasper.runtime.HttpJspBase
       return true;
     }
     _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_15);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_2(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_2 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_2.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_2.setParent(null);
+    _jspx_th_c_if_2.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${isNQL}", boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_2 = _jspx_th_c_if_2.doStartTag();
+    if (_jspx_eval_c_if_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                        <form class=\"form-inline\" action=\"ChartServlet\">\r\n");
+        out.write("                            <div class=\"form-group mx-sm-3 mb-2\">\r\n");
+        out.write("                                <label for=\"inputPassword2\" class=\"sr-only\">Password</label>\r\n");
+        out.write("                                <input type=\"number\" class=\"form-control\" id=\"yearOne\" name =\"yearOne\" placeholder=\"2016\">\r\n");
+        out.write("                            </div>\r\n");
+        out.write("                            <div class=\"form-group mx-sm-3 mb-2\">\r\n");
+        out.write("                                <label for=\"inputPassword2\" class=\"sr-only\">Password</label>\r\n");
+        out.write("                                <input type=\"number\" class=\"form-control\" id=\"yearTwo\" name=\"yearTwo\" placeholder=\"2017\">\r\n");
+        out.write("                            </div>\r\n");
+        out.write("                            <button type=\"submit\" class=\"btn btn-primary mb-2\">Xem biển đồ</button>\r\n");
+        out.write("                        </form>\r\n");
+        out.write("                    ");
+        int evalDoAfterBody = _jspx_th_c_if_2.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
     return false;
   }
 }

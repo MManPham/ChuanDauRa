@@ -5,66 +5,48 @@
  */
 package com.models;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Man Pham
+ * @author Hayama
  */
-public class SinhvienW implements Serializable {
+public class testSinhVien {
     private String mssv;
     private String tensv;
     private String sodt;
     private String nienkhoa;
     private String passw;
     private String maCN;
-    private List<CDR_KH_KQW> chuanDauRA_KH;
-    private List<ListCDR_MHW> listCDR_MH;
+    private List<CDR_KH_KQ> chuanDauRA_KH;
+    private List<testListCDR_MH> listCDR_MH;
 
 
 
-    public void setListCDR_MH(List<ListCDR_MHW> listCDR_MH) {
+    public void setListCDR_MH(List<testListCDR_MH> listCDR_MH) {
         this.listCDR_MH = listCDR_MH;
     }
 
-    public List<ListCDR_MHW> getListCDR_MH() {
+    public List<testListCDR_MH> getListCDR_MH() {
         return listCDR_MH;
     }
 
 
     
-    public SinhvienW() {
+    public testSinhVien() {
     }
 
-    public SinhvienW(String mssv) {
+    public testSinhVien(String mssv) {
         this.mssv = mssv;
     }
 
-    public SinhvienW(String mssv, String tensv) {
+    public testSinhVien(String mssv, String tensv) {
         this.mssv = mssv;
         this.tensv = tensv;
     }
     
 
-    public SinhvienW(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN ) {
+    public testSinhVien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN ) {
         this.mssv = mssv;
         this.tensv = tensv;
         this.sodt = sodt;
@@ -73,7 +55,7 @@ public class SinhvienW implements Serializable {
         this.maCN = maCN;
     }
 
-    public SinhvienW(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQW> chuanDauRA_KH) {
+    public testSinhVien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQ> chuanDauRA_KH) {
         this.mssv = mssv;
         this.tensv = tensv;
         this.sodt = sodt;
@@ -82,7 +64,7 @@ public class SinhvienW implements Serializable {
         this.maCN = maCN;
         this.chuanDauRA_KH = chuanDauRA_KH;
     }
-    public SinhvienW(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQW> chuanDauRA_KH,List<ListCDR_MHW> listCDR_MH ) {
+    public testSinhVien(String mssv, String tensv, String sodt, String nienkhoa, String passw, String maCN, List<CDR_KH_KQ> chuanDauRA_KH,List<testListCDR_MH> listCDR_MH ) {
         this.mssv = mssv;
         this.tensv = tensv;
         this.sodt = sodt;
@@ -93,11 +75,11 @@ public class SinhvienW implements Serializable {
         this.listCDR_MH = listCDR_MH;
     }
 
-    public List<CDR_KH_KQW> getChuanDauRA_KH() {
+    public List<CDR_KH_KQ> getChuanDauRA_KH() {
         return chuanDauRA_KH;
     }
 
-    public void setChuanDauRA_KH(List<CDR_KH_KQW> chuanDauRA_KH) {
+    public void setChuanDauRA_KH(List<CDR_KH_KQ> chuanDauRA_KH) {
         this.chuanDauRA_KH = chuanDauRA_KH;
     }
 
@@ -149,7 +131,31 @@ public class SinhvienW implements Serializable {
         this.maCN = maCN;
     }
 
-
+//    @XmlTransient
+//    public Collection<SinhvienMonhoc> getSinhvienMonhocCollection() {
+//        return sinhvienMonhocCollection;
+//    }
+//
+//    public void setSinhvienMonhocCollection(Collection<SinhvienMonhoc> sinhvienMonhocCollection) {
+//        this.sinhvienMonhocCollection = sinhvienMonhocCollection;
+//    }
+//
+//    public Chuyennganh getMachuyennganh() {
+//        return machuyennganh;
+//    }
+//
+//    public void setMachuyennganh(Chuyennganh machuyennganh) {
+//        this.machuyennganh = machuyennganh;
+//    }
+//
+//    @XmlTransient
+//    public Collection<Ketquathi> getKetquathiCollection() {
+//        return ketquathiCollection;
+//    }
+//
+//    public void setKetquathiCollection(Collection<Ketquathi> ketquathiCollection) {
+//        this.ketquathiCollection = ketquathiCollection;
+//    }
 
     @Override
     public int hashCode() {
@@ -161,11 +167,11 @@ public class SinhvienW implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SinhvienW)) {
+        if (!(object instanceof testSinhVien)) {
             return false;
         }
         
-        SinhvienW other = (SinhvienW) object;
+        testSinhVien other = (testSinhVien) object;
         if ((this.mssv == null && other.mssv != null) || (this.mssv != null && !this.mssv.equals(other.mssv))) {
             return false;
         }
@@ -176,10 +182,4 @@ public class SinhvienW implements Serializable {
     public String toString() {
         return "DBCDR.Sinhvien[ mssv=" + mssv + " ]";
     }
-    
 }
-
-
-
-
-
