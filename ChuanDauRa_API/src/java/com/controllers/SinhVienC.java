@@ -5,30 +5,28 @@
  */
 package com.controllers;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import com.models.Sinhvien;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import com.main.ConnectDB;
 import com.models.CDR_KH_KQ;
 import com.models.CDR_MH;
 import com.models.ListCDR_MH;
+import com.models.Sinhvien;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 /**
  *
- * @author Man Pham
+ * @author Hayama
  */
 @Path("sinhvien")
 public class SinhVienC {
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Sinhvien> getAllSV() throws ClassNotFoundException, SQLException {
@@ -208,8 +206,13 @@ public class SinhVienC {
         try {
             con = ConnectDB.makeConnect();
             rs = con.prepareStatement("SELECT DISTINCT CDRMH FROM CDR_MH WHERE MAMH = '"+maMon+"'").executeQuery();
-            while (rs.next()) {                
-                list_cdrmh.add(new CDR_MH(rs.getString(1), getValueOfCDRMH(mssv,maMon, rs.getString(1))));
+            while (rs.next()) {
+                
+                float ketqua = getValueOfCDRMH(mssv,maMon, rs.getString(1));
+                String tempCDR_MH = rs.getString("CDRMH");
+                List<CDR_KH_KQ> temp = new ArrayList<>(getChuanDauRaKhoaHocCuaMotMon(maMon,tempCDR_MH, ketqua));
+                list_cdrmh.add(new CDR_MH(tempCDR_MH, ketqua, temp));
+                // list_cdrmh.add(new testCDR_MH(rs.getString(1), getValueOfCDRMH(mssv,maMon, rs.getString(1))));
             }
             
         } catch (SQLException e) {
@@ -322,6 +325,23 @@ public class SinhVienC {
                         
                     }
                 }
+//                    for(int i = 0; i < danhSachMonHoc.size(); i++){
+//                        if(danhSachMonHoc.get(i).getMaMon().equals(rs.getString("MAMH"))){
+//                            int numberCDRMHofKH = countCDRKHofMonHoc(danhSachMonHoc.get(i).getMaMon(), CDR_KH);
+//                            for(int j = 0; j < danhSachMonHoc.get(i).getDanhSach_CDR_CN().size(); j++){
+//                                if(danhSachMonHoc.get(i).getDanhSach_CDR_CN().get(j).getChuanDauRaMonHoc().equals(rs.getString("CDRMH"))){
+//                                    float temp = danhSachMonHoc.get(i).getDanhSach_CDR_CN().get(j).getKetQua()/numberCDRMHofKH;
+//                                    result += temp;
+//                                    
+//                                    danhSachMonHoc.get(i).getDanhSach_CDR_CN().get(j).addCDR_KH(CDR_KH, temp);
+//                                    
+//                                }
+//                                
+//                            }
+//                            count ++;
+//                        }
+//                    }
+
             }
         if (count == 0) return 0;
         return result/(float)count;
@@ -370,7 +390,37 @@ public class SinhVienC {
             }
         }  
     }
+        public ArrayList<CDR_KH_KQ> getChuanDauRaKhoaHocCuaMotMon(String maMon ,String CDR_MH, float ketqua) throws ClassNotFoundException{
+        int count = 0;
+        Connection con = null;
+        ResultSet rs = null;
+        ArrayList<CDR_KH_KQ> chuanDauRaKhoaHoc = new ArrayList<>();
+        try {
+            con = ConnectDB.makeConnect();
+            rs =  con.prepareStatement("SELECT MAMH, CDRMH, CDRKH " +
+                                        "FROM CDR_MH " +
+                                        "WHERE MAMH = '"+ maMon +"' AND CDRMH = '"+ CDR_MH +"'")                                     
+                                        .executeQuery();
+            while( rs.next()){
+               String CDRKH = rs.getString("CDRKH");
+               count = countCDRKHofMonHoc(maMon, CDRKH);
+               chuanDauRaKhoaHoc.add(new CDR_KH_KQ(CDRKH, ketqua/count));
+            }
             
-    
+            return chuanDauRaKhoaHoc;
+            
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                
+            }
+        }  
+    }
+            
 }
-

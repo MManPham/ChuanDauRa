@@ -5,8 +5,6 @@
  */
 package com.models;
 
-import java.util.List;
-
 /**
  *
  * @author Hayama

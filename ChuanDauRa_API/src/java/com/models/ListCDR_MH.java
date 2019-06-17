@@ -13,7 +13,6 @@ import java.util.List;
  * @author Hayama
  */
 public class ListCDR_MH {
- 
     private String maMon;
     private List<CDR_MH> danhSach_CDR_CN;
     
@@ -47,8 +46,4 @@ public class ListCDR_MH {
             this.danhSach_CDR_CN.add(x);
         }
     }
-    
-    
-    
-    
 }

@@ -5,6 +5,9 @@
  */
 package com.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Hayama
@@ -12,36 +15,48 @@ package com.models;
 public class CDR_MHW {
     private String chuanDauRaMonHoc;
     private float ketQua;
-    
-    public CDR_MHW(){
-        
-    }
-    
-    public CDR_MHW(String chuanDauRaMonHoc, float ketQua) {
-        this.chuanDauRaMonHoc = chuanDauRaMonHoc;
-        this.ketQua = (float)(Math.floor(ketQua *10)/10);
-    }
+    private List<CDR_KH_KQW> chuanDauRaKhoaHoc;
 
-    public void setChuanDauRaMonHoc(String chuanDauRaMonHoc) {
+    public CDR_MHW(String chuanDauRaMonHoc, float ketQua, List<CDR_KH_KQW> chuanDauRaKhoaHoc) {
         this.chuanDauRaMonHoc = chuanDauRaMonHoc;
-    }
-
-    public void setKetQua(float ketQua) {
         this.ketQua = ketQua;
+        this.chuanDauRaKhoaHoc = chuanDauRaKhoaHoc;
+    }
+
+    public CDR_MHW() {
     }
 
     public String getChuanDauRaMonHoc() {
         return chuanDauRaMonHoc;
     }
 
+    public void setChuanDauRaMonHoc(String chuanDauRaMonHoc) {
+        this.chuanDauRaMonHoc = chuanDauRaMonHoc;
+    }
+
     public float getKetQua() {
         return ketQua;
     }
+
+    public void setKetQua(float ketQua) {
+        this.ketQua = ketQua;
+    }
+
+    public List<CDR_KH_KQW> getChuanDauRaKhoaHoc() {
+        return chuanDauRaKhoaHoc;
+    }
+
+    public void setChuanDauRaKhoaHoc(List<CDR_KH_KQW> chuanDauRaKhoaHoc) {
+        this.chuanDauRaKhoaHoc = chuanDauRaKhoaHoc;
+    }
+
+    public CDR_MHW(String chuanDauRaMonHoc, float ketQua) {
+        this.chuanDauRaMonHoc = chuanDauRaMonHoc;
+        this.ketQua = ketQua;
+    }
+
+    
+        
+    
+            
 }
-
-
-
-
-
-
-

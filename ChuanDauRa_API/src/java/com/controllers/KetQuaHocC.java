@@ -1,100 +1,44 @@
 /*
- * To change String license header, choose License Headers in Project Properties.
- * To change String template file, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.controllers;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
+import com.main.ConnectDB;
 import com.models.SinhvienMonhoc;
+import com.models.SinhvienMonhoc;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.main.ConnectDB;
-import com.models.ChiTietSV_MH;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Man Pham
+ * @author Hayama
  */
 @Path("ketquahoc")
 public class KetQuaHocC {
-
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<SinhvienMonhoc> getDataJson() throws ClassNotFoundException, SQLException {
-        List<SinhvienMonhoc> listSv = new ArrayList<>();
-        Connection con = null;
-        ResultSet rs = null;
-        SinhVienC sv_C = new SinhVienC();
-        try {
-            con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT * FROM SINHVIEN_MONHOC").executeQuery();
-            while (rs.next()) {
-                SinhvienMonhoc newSvMh = new SinhvienMonhoc(
-                        rs.getString("MALOPMH"),
-                        getNameLopMH(rs.getString("MALOPMH")),
-                        rs.getDouble("DIEMQT"),
-                        rs.getDouble("DIEMGK"),
-                        rs.getDouble("DIEMTH"),
-                        rs.getDouble("DIEMCK"),
-                        rs.getInt("TINCHI"),
-                        sv_C.getCDR_MH(rs.getString("MSSV"), rs.getString("MAMH"))
-                //callProcedure("PROC_IN_MSSV_MAMH", rs.getString("MSSV"), rs.getString("MALOPMH"))
-                );
-                listSv.add(newSvMh);
-            }
-            return listSv;
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-            return null;
-        } finally {
-            try {
-                rs.close();
-                con.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+    public String getDataJson() throws ClassNotFoundException, SQLException {
+        
+            return "test ket qua hoc";
+        
 
     }
-
-    //Tim ten lop hoc dua ma lop
-    public String getNameLopMH(String maLopMH) throws ClassNotFoundException {
-        String TenLop = null;
-        Connection con = null;
-        ResultSet rs = null;
-        try {
-            con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT * FROM LOPMONHOC WHERE MALOPMH = '" + maLopMH + "'").executeQuery();
-            while (rs.next()) {
-                TenLop = rs.getNString("TENLOPMH");
-            }
-            return TenLop;
-        } catch (SQLException e) {
-            System.out.println("Error: " + e);
-            return "Error: " + e;
-        } finally {
-            try {
-                rs.close();
-                con.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
+    
     @GET
-    @Path("{mssv}")
+     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<SinhvienMonhoc> find(@PathParam("mssv") String mssv) throws ClassNotFoundException {
+    public List<SinhvienMonhoc> find(@PathParam("id") String mssv) throws ClassNotFoundException {
         List<SinhvienMonhoc> listSv = new ArrayList<>();
         Connection con = null;
         ResultSet rs = null;
@@ -102,19 +46,23 @@ public class KetQuaHocC {
 
         try {
             con = ConnectDB.makeConnect();
-            rs = con.prepareStatement("SELECT SVMH.MSSV,MONHOC.MAMH,SVMH.MALOPMH,SVMH.DIEMQT,SVMH.DIEMGK,SVMH.DIEMTH,SVMH.DIEMCK,MONHOC.TINCHI\n"
-                    + "FROM SINHVIEN_MONHOC SVMH, MONHOC,LOPMONHOC \n"
-                    + "WHERE MSSV = '" + mssv + "' AND SVMH.MALOPMH= LOPMONHOC.MALOPMH AND LOPMONHOC.MAMON = MONHOC.MAMH").executeQuery();
+            rs = con.prepareStatement("SELECT SVMH.MSSV, MH.MAMH, SVMH.MALOPMH, SVMH.DIEMQT, SVMH.DIEMGK, SVMH.DIEMTH, SVMH.DIEMCK, MH.TINCHI " +
+                                        "FROM SINHVIEN_MONHOC SVMH, MONHOC MH, LOPMONHOC LMH " +
+                                        "WHERE SVMH.MALOPMH = LMH.MALOPMH AND LMH.MAMON = MH.MAMH AND SVMH.MSSV = '"+ mssv  +"'").executeQuery();
             while (rs.next()) {
                 SinhvienMonhoc newSv = new SinhvienMonhoc(
+                        rs.getString("MSSV"),
+                        getNameSV(mssv),
                         rs.getString("MALOPMH"),
-                        getNameLopMH(rs.getString("MALOPMH")),
+                        getNameLopMh(rs.getString("MALOPMH")),
                         rs.getDouble("DIEMQT"),
                         rs.getDouble("DIEMGK"),
                         rs.getDouble("DIEMTH"),
                         rs.getDouble("DIEMCK"),
                         rs.getInt("TINCHI"),
                         sv_C.getCDR_MH(rs.getString("MSSV"), rs.getString("MAMH"))
+                        
+                        
                 //callProcedure("PROC_IN_MSSV_MAMH_KQ", rs.getString("MSSV"), rs.getString("MALOPMH"))
                 );
                 listSv.add(newSv);
@@ -133,40 +81,53 @@ public class KetQuaHocC {
             }
         }
     }
-
-    @GET
-    @Path("/test")
-    @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<ChiTietSV_MH> Test() throws ClassNotFoundException {
-        return callProcedure("PROC_IN_MSSV_MAMH", "12340001", "IE204.I32");
-    }
-
-    public ArrayList<ChiTietSV_MH> callProcedure(String procName, String mssv, String mlopmh) throws ClassNotFoundException {
-        ArrayList<ChiTietSV_MH> dsChiTietSV = new ArrayList<>();
-        String SPsql = "EXEC " + procName + " ?,?";
-        PreparedStatement ps = null;
+    
+    public String getNameSV(String mssv) throws ClassNotFoundException{
+        String result = null;
         Connection con = null;
         ResultSet rs = null;
+        
+
         try {
-            con = ConnectDB.makeConnect();   // java.sql.Connection
-            ps = con.prepareStatement(SPsql);
-            ps.setEscapeProcessing(true);
-            ps.setQueryTimeout(90);
-            ps.setString(1, mssv);
-            ps.setString(2, mlopmh);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ChiTietSV_MH ctSVMH = new ChiTietSV_MH(rs);
-                dsChiTietSV.add(ctSVMH);
-            }
-            return dsChiTietSV;
-        } catch (SQLException se) {
-            System.out.println("Error al ejecutar SQL" + se.getMessage());
-            throw new IllegalArgumentException("Error al ejecutar SQL: " + se.getMessage());
+            con = ConnectDB.makeConnect();
+            rs = con.prepareStatement("SELECT TENSV FROM SINHVIEN WHERE MSSV = '"+ mssv +"'").executeQuery();
+            rs.next();
+            result = rs.getString("TENSV");                
+
+            return result;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+            return null;
         } finally {
             try {
                 rs.close();
-                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+    }
+    
+    public String getNameLopMh(String maLop) throws ClassNotFoundException{
+                String result = null;
+        Connection con = null;
+        ResultSet rs = null;
+        
+
+        try {
+            con = ConnectDB.makeConnect();
+            rs = con.prepareStatement("SELECT TENLOPMH FROM LOPMONHOC WHERE MALOPMH = '"+ maLop+"'").executeQuery();
+            rs.next();
+            result = rs.getString("TENLOPMH");                
+
+            return result;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+            return null;
+        } finally {
+            try {
+                rs.close();
                 con.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -175,6 +136,3 @@ public class KetQuaHocC {
     }
 
 }
-
-
-

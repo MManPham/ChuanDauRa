@@ -34,8 +34,6 @@ public class ApplicationConfig extends Application {
         resources.add(com.controllers.KetQuaHocC.class);
         resources.add(com.controllers.NhaQuanLyC.class);
         resources.add(com.controllers.SinhVienC.class);
-        resources.add(com.controllers.testKetQuaHocC.class);
-        resources.add(com.controllers.testSinhVienC.class);
         resources.add(com.main.GenericResource.class);
     }
     
